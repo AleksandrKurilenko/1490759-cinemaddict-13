@@ -1,7 +1,7 @@
 # Проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Куриленко](https://up.htmlacademy.ru/ecmascript/13/user/1490759).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Кривонос](https://htmlacademy.ru/profile/id1311037).
 
 ---
 
