@@ -1,4 +1,4 @@
-import { createFilmCardTemplate } from "./film-card";
+import {createFilmCardTemplate} from "./film-card";
 
 const createCardsForTop = (count) => {
   let result = ``;
@@ -11,7 +11,7 @@ const createCardsForTop = (count) => {
 export const createFilmTop = (count, title) => {
   return `<section class="films-list films-list--extra">
     <h2 class="films-list__title">${title}</h2>
-    <div class="films-list__container">${createCardsForTop(count)}
+    <div class="films-list__container"> ${createCardsForTop(count)} 
     </div>
   </section>`;
 };
