@@ -4,7 +4,7 @@ import {createSortTemplate} from "./view/sort.js";
 import {createFilmListTemplate} from "./view/film-list.js";
 import {createFilmCardTemplate} from "./view/film-card.js";
 import {createMoreButton} from "./view/more-button.js";
-import {createFilmTop} from "./view/film-top.js";
+import {createFilmTop} from "./view/film-card.js";
 import {createTotalFilmsTemplate} from "./view/total-films.js";
 
 const siteHeaderElement = document.querySelector(`.header__logo`);

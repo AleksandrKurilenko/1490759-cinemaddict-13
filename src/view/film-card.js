@@ -17,3 +17,21 @@ export const createFilmCardTemplate = () => {
     </div>
   </article>`;
 };
+
+const createCardsForTop = (count) => {
+  let result = ``;
+  for (let i = 0; i < count; i++) {
+    result += createFilmCardTemplate();
+  }
+  return result;
+};
+
+const createFilmTop = (count, title) => {
+  return `<section class="films-list films-list--extra">
+    <h2 class="films-list__title">${title}</h2>
+    <div class="films-list__container"> ${createCardsForTop(count)} 
+    </div>
+  </section>`;
+};
+
+export {createFilmTop};
