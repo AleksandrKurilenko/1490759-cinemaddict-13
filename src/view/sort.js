@@ -1,7 +1,26 @@
+const detailsSort = [
+  {
+    textA: `Sort by default`,
+    classSortA: ``
+  },
+  {
+    textA: `Sort by date`,
+    classSortA: ``
+  },
+  {
+    textA: `Sort by rating`,
+    classSortA: `sort__button--active`
+  }
+];
+
+const sortDetailsMenu = ({textA, classSortA}) => {
+  return `<li><a href="#" class="sort__button ${classSortA}">${textA}</a></li>`;
+};
+
 export const createSortTemplate = () => {
   return `<ul class="sort">
-    <li><a href="#" class="sort__button">Sort by default</a></li>
-    <li><a href="#" class="sort__button">Sort by date</a></li>
-    <li><a href="#" class="sort__button sort__button--active">Sort by rating</a></li>
-  </ul>`;
+ ${detailsSort.map((sortDetail) => {
+    return sortDetailsMenu(sortDetail);
+  })}
+    </ul>`;
 };

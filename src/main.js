@@ -11,7 +11,7 @@ const siteHeaderElement = document.querySelector(`.header__logo`);
 const siteMainElement = document.querySelector(`.main`);
 
 const FILMS = 5;
-const LIMIT = 2;
+const CARD_NUMBER = 2;
 const TITLE = [`Top rated`, `Most commented`];
 
 const render = (container, template, place) => {
@@ -34,8 +34,8 @@ render(filmListContainer, createMoreButton(), `afterend`);
 
 const filmsElement = document.querySelector(`.films`);
 
-for (let j = 0; j < LIMIT; j++) {
-  render(filmsElement, createFilmTop(LIMIT, TITLE[j]), `beforeend`);
+for (let j = 0; j < TITLE.length; j++) {
+  render(filmsElement, createFilmTop(CARD_NUMBER, TITLE[j]), `beforeend`);
 }
 
 render(siteFooterElement, createTotalFilmsTemplate(), `beforeend`);

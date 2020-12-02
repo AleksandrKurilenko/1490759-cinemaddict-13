@@ -1,3 +1,47 @@
+const detailsStats = [
+  {
+    id: `statistic-all-time`,
+    value: `all-time`,
+    check: `checked`,
+    forLabel: `statistic-all-time`,
+    text: `All time`
+  },
+  {
+    id: `statistic-today`,
+    value: `today`,
+    check: ``,
+    forLabel: `statistic-today`,
+    text: `Today`
+  },
+  {
+    id: `statistic-week`,
+    value: `week`,
+    check: ``,
+    forLabel: `statistic-week`,
+    text: `Week`
+  },
+  {
+    id: `statistic-month`,
+    value: `month`,
+    check: ``,
+    forLabel: `statistic-month`,
+    text: `Month`
+  },
+  {
+    id: `statistic-year`,
+    value: `year`,
+    check: ``,
+    forLabel: `statistic-year`,
+    text: `Year`
+  },
+];
+
+
+const createStats = ({id, value, check, forLabel, text}) => {
+  return `<input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="${id}" value="${value}" ${check}>
+<label for="${forLabel}" class="statistic__filters-label">${text}</label>`;
+};
+
 
 export const createStatsTemplate = () => {
   return `<section class="statistic">
@@ -9,21 +53,9 @@ export const createStatsTemplate = () => {
 
  <form action="https://echo.htmlacademy.ru/" method="get" class="statistic__filters">
    <p class="statistic__filters-description">Show stats:</p>
-
-   <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-all-time" value="all-time" checked>
-   <label for="statistic-all-time" class="statistic__filters-label">All time</label>
-
-   <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-today" value="today">
-   <label for="statistic-today" class="statistic__filters-label">Today</label>
-
-   <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-week" value="week">
-   <label for="statistic-week" class="statistic__filters-label">Week</label>
-
-   <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-month" value="month">
-   <label for="statistic-month" class="statistic__filters-label">Month</label>
-
-   <input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="statistic-year" value="year">
-   <label for="statistic-year" class="statistic__filters-label">Year</label>
+   ${detailsStats.map((detail) => {
+    return createStats(detail);
+  })}
  </form>
 
  <ul class="statistic__text-list">
