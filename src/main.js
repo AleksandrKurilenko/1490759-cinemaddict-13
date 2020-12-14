@@ -35,7 +35,7 @@ render(filmListContainer, createMoreButton(), `afterend`);
 const filmsElement = document.querySelector(`.films`);
 
 for (let j = 0; j < TITLE.length; j++) {
-  render(filmsElement, createFilmTop(CARD_NUMBER, TITLE[j], FILMS.slice(1)), `beforeend`);
+  render(filmsElement, createFilmTop(CARD_NUMBER, TITLE[j], FILMS.slice(0, 2)), `beforeend`);
 }
 
 render(siteFooterElement, createTotalFilmsTemplate(), `beforeend`);
