@@ -13,14 +13,13 @@ const detailsSort = [
   }
 ];
 
+
 const sortDetailsMenu = ({textA, classSortA}) => {
   return `<li><a href="#" class="sort__button ${classSortA}">${textA}</a></li>`;
 };
 
 export const createSortTemplate = () => {
   return `<ul class="sort">
- ${detailsSort.map((sortDetail) => {
-    return sortDetailsMenu(sortDetail);
-  })}
+ ${detailsSort.map(sortDetailsMenu).join(``)}
     </ul>`;
 };
