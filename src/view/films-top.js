@@ -1,13 +1,7 @@
 import { createElement } from "./utils";
 import {createFilmCardTemplate} from "./film-card";
 
-// const createCardsForTop = (count, FILMS) => {
-//   let result = ``;
-//   for (let i = 0; i < count; i++) {
-//     result += 
-//   }
-//   return result;
-// };
+
 
 const createFilmTop = (title, FILMS) => {
   return `<section class="films-list films-list--extra">

@@ -21,7 +21,7 @@ import {
   RenderPosition
 } from "./view/utils.js";
 
-const siteHeaderElement = document.querySelector(`.header__logo`);
+const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
 const FILMS = getFilmsData();
@@ -34,7 +34,7 @@ renderElement(siteMainElement, new MenuTemplate().getElement(), RenderPosition.B
 renderElement(siteMainElement, new SortMenu().getElement(), RenderPosition.BEFOREEND);
 renderElement(siteMainElement, new FilmListTemplate().getElement(), RenderPosition.BEFOREEND);
 
-const filmListContainer = document.querySelector(`.films-list__container`);
+const filmListContainer = document.querySelector(`.films-list`);
 const siteFooterElement = document.querySelector(`.footer__statistics`);
 
 renderElement(filmListContainer, new FilmCardComponent(FILMS).getElement(), RenderPosition.BEFOREEND);
