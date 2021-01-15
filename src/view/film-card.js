@@ -1,46 +1,31 @@
-
-const createFilmTemplate = ({title, rating, year, duration, genre, img, description, comments, classEmpty}) => {
-  return `<article class="film-card">
-  <h3 class="film-card__title">${title}</h3>
-  <p class="film-card__rating">${rating}</p>
-  <p class="film-card__info">
-    <span class="film-card__year">${year}</span>
-    <span class="film-card__duration">${duration}</span>
-    <span class="film-card__genre">${genre}</span>
-  </p>
-  <img src="./images/posters/${img}" alt="" class="film-card__poster">
-  <p class="film-card__description">${description}</p>
-  <a class="film-card__comments">${comments}</a>
-  <div class="film-card__controls">
-    <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${classEmpty}" type="button">Add to watchlist</button>
-    <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${classEmpty}" type="button">Mark as watched</button>
-    <button class="film-card__controls-item button film-card__controls-item--favorite ${classEmpty}" type="button">Mark as favorite</button>
-  </div>
-</article>`;
-};
-
-// const deCard = detailsCard.map((detail) => {
-//   return createFilmTemplate(detail);
-// }).join(``);
+import {createElement, renderElement, RenderPosition} from "./utils";
+import FilmSingleTemplate, {createFilmTemplate} from "./film-single";
 
 export const createFilmCardTemplate = (FILMS) => {
   return FILMS.map(createFilmTemplate).join(``);
 };
 
-const createCardsForTop = (count, FILMS) => {
-  let result = ``;
-  for (let i = 0; i < count; i++) {
-    result += createFilmCardTemplate(FILMS);
+export default class FilmCardComponent {
+  constructor(films) {
+    this._element = null;
+    this._films = [];
+    films.forEach((film) => {
+      this._films.push(new FilmSingleTemplate(film));
+    });
   }
-  return result;
-};
 
-const createFilmTop = (count, title, FILMS) => {
-  return `<section class="films-list films-list--extra">
-    <h2 class="films-list__title">${title}</h2>
-    <div class="films-list__container"> ${createCardsForTop(count, FILMS)} 
-    </div>
-  </section>`;
-};
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(`<div class="films-list__container"></div>`);
+      this._films.forEach((film) => {
+        renderElement(this._element, film.getElement(), RenderPosition.BEFOREEND);
+      });
+    }
 
-export {createFilmTop};
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

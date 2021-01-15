@@ -1,41 +1,58 @@
-import {createUserTemplate} from "./view/user.js";
-import {createMenuTemplate} from "./view/menu.js";
-import {createSortTemplate} from "./view/sort.js";
-import {createFilmListTemplate} from "./view/film-list.js";
-import {createFilmCardTemplate} from "./view/film-card.js";
-import {createMoreButton} from "./view/more-button.js";
-import {createFilmTop} from "./view/film-card.js";
-import {createTotalFilmsTemplate} from "./view/total-films.js";
+import UserTemplate from "./view/user.js";
+
+import MenuTemplate from "./view/menu.js";
+
+import SortMenu from "./view/sort.js";
+
+import FilmListTemplate from "./view/film-list.js";
+
+import FilmCardComponent from "./view/film-card.js";
+
+import MoreButtonTemplate from "./view/more-button.js";
+
+import FilmCardTopComponent from "./view/films-top.js";
+
+import TotalFilmsTemplate from "./view/total-films.js";
+
 import getFilmsData from "./view/data.js";
 
-const siteHeaderElement = document.querySelector(`.header__logo`);
+import {
+  renderElement,
+  RenderPosition
+} from "./view/utils.js";
+
+const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
 const FILMS = getFilmsData();
-const CARD_NUMBER = 1;
+
 const TITLE = [`Top rated`, `Most commented`];
 
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
+renderElement(siteHeaderElement, new UserTemplate().getElement(), RenderPosition.BEFOREEND);
+renderElement(siteMainElement, new MenuTemplate().getElement(), RenderPosition.BEFOREEND);
+renderElement(siteMainElement, new SortMenu().getElement(), RenderPosition.BEFOREEND);
+renderElement(siteMainElement, new FilmListTemplate().getElement(), RenderPosition.BEFOREEND);
 
-// console.log(FILMS);
-render(siteHeaderElement, createUserTemplate(), `afterend`);
-render(siteMainElement, createMenuTemplate(), `beforeend`);
-render(siteMainElement, createSortTemplate(), `beforeend`);
-render(siteMainElement, createFilmListTemplate(), `beforeend`);
-
-const filmListContainer = document.querySelector(`.films-list__container`);
+const filmListContainer = document.querySelector(`.films-list`);
 const siteFooterElement = document.querySelector(`.footer__statistics`);
 
-render(filmListContainer, createFilmCardTemplate(FILMS), `beforeend`);
+renderElement(filmListContainer, new FilmCardComponent(FILMS).getElement(), RenderPosition.BEFOREEND);
 
-render(filmListContainer, createMoreButton(), `afterend`);
+renderElement(filmListContainer, new MoreButtonTemplate().getElement(), RenderPosition.BEFOREEND);
 
 const filmsElement = document.querySelector(`.films`);
 
 for (let j = 0; j < TITLE.length; j++) {
-  render(filmsElement, createFilmTop(CARD_NUMBER, TITLE[j], FILMS.slice(0, 2)), `beforeend`);
+  renderElement(filmsElement, new FilmCardTopComponent(TITLE[j], FILMS.slice(0, 2)).getElement(), RenderPosition.BEFOREEND);
 }
 
-render(siteFooterElement, createTotalFilmsTemplate(), `beforeend`);
+renderElement(siteFooterElement, new TotalFilmsTemplate().getElement(), RenderPosition.BEFOREEND);
+
+const listenerCard = () => {
+  const as = Array.from(document.querySelectorAll(`.film-card__title, .film-card__poster, .film-card__description`));
+
+  for (const a of as) {
+    a.addEventListener(`click`, () => {});
+  }
+};
+listenerCard();

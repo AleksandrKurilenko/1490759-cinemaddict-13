@@ -1,89 +1,89 @@
-const detailsTable = [
-  {
-    term: `Director`,
-    cell: `Anthony Mann`
-  },
-  {
-    term: `Writers`,
-    cell: `Anne Wigton, Heinz Herald, Richard Weil`,
-  },
-  {
-    term: `Actors`,
-    cell: `Erich von Stroheim, Mary Beth Hughes, Dan Duryea`,
-  },
-  {
-    term: `Release Date`,
-    cell: `30 March 1945`,
-  },
-  {
-    term: `Runtime`,
-    cell: `1h 18m`,
-  },
-  {
-    term: `Country`,
-    cell: `USA`,
-  },
+const detailsTable = [{
+  term: `Director`,
+  cell: `Anthony Mann`
+},
+{
+  term: `Writers`,
+  cell: `Anne Wigton, Heinz Herald, Richard Weil`,
+},
+{
+  term: `Actors`,
+  cell: `Erich von Stroheim, Mary Beth Hughes, Dan Duryea`,
+},
+{
+  term: `Release Date`,
+  cell: `30 March 1945`,
+},
+{
+  term: `Runtime`,
+  cell: `1h 18m`,
+},
+{
+  term: `Country`,
+  cell: `USA`,
+},
 ];
 
 
-const detailsСheckbox = [
-  {
-    id: `watchlist`,
-    name: `watchlist`,
-    forLabel: `watchlist`,
-    classLabel: `film-details__control-label--watchlist`,
-    text: `Add to watchlist`
-  },
-  {
-    id: `watched`,
-    name: `watched`,
-    forLabel: `watched`,
-    classLabel: `film-details__control-label--watched`,
-    text: `Already watched`
-  },
-  {
-    id: `favorite`,
-    name: `favorite`,
-    forLabel: `watchlist`,
-    classLabel: `film-details__control-label--favorite`,
-    text: `Add to favorites`
-  }
+const detailsСheckbox = [{
+  id: `watchlist`,
+  name: `watchlist`,
+  forLabel: `watchlist`,
+  classLabel: `film-details__control-label--watchlist`,
+  text: `Add to watchlist`
+},
+{
+  id: `watched`,
+  name: `watched`,
+  forLabel: `watched`,
+  classLabel: `film-details__control-label--watched`,
+  text: `Already watched`
+},
+{
+  id: `favorite`,
+  name: `favorite`,
+  forLabel: `watchlist`,
+  classLabel: `film-details__control-label--favorite`,
+  text: `Add to favorites`
+}
 ];
 
 
-const detailsEmoji = [
-  {
-    id: `emoji-smile`,
-    value: `smile`,
-    check: `checked`,
-    forLabel: `emoji-smile`,
-    img: `smile.png`
-  },
-  {
-    id: `emoji-sleeping`,
-    value: `sleeping`,
-    check: ``,
-    forLabel: `emoji-sleeping`,
-    img: `sleeping.png`
-  },
-  {
-    id: `emoji-puke`,
-    value: `puke`,
-    check: ``,
-    forLabel: `emoji-puke`,
-    img: `puke.png`
-  },
-  {
-    id: `emoji-angry`,
-    value: `angry`,
-    check: ``,
-    forLabel: `emoji-angry`,
-    img: `angry.png`
-  }
+const detailsEmoji = [{
+  id: `emoji-smile`,
+  value: `smile`,
+  check: `checked`,
+  forLabel: `emoji-smile`,
+  img: `smile.png`
+},
+{
+  id: `emoji-sleeping`,
+  value: `sleeping`,
+  check: ``,
+  forLabel: `emoji-sleeping`,
+  img: `sleeping.png`
+},
+{
+  id: `emoji-puke`,
+  value: `puke`,
+  check: ``,
+  forLabel: `emoji-puke`,
+  img: `puke.png`
+},
+{
+  id: `emoji-angry`,
+  value: `angry`,
+  check: ``,
+  forLabel: `emoji-angry`,
+  img: `angry.png`
+}
 ];
 
 
-const createPopupTable = ({term, cell}) => {
+const createPopupTable = ({
+  term,
+  cell
+}) => {
   return `<tr class="film-details__row">
 <td class="film-details__term">${term}</td>
 <td class="film-details__cell">${cell}</td>
@@ -91,13 +91,25 @@ const createPopupTable = ({term, cell}) => {
 };
 
 
-const createPopupСheckbox = ({id, name, forLabel, classLabel, text}) => {
+const createPopupСheckbox = ({
+  id,
+  name,
+  forLabel,
+  classLabel,
+  text
+}) => {
   return `<input type="checkbox" class="film-details__control-input visually-hidden" id="${id}" name="${name}">
   <label for="${forLabel}" class="film-details__control-label ${classLabel}">${text}</label>`;
 };
 
 
-const createPopupEmoji = ({id, value, check, forLabel, img}) => {
+const createPopupEmoji = ({
+  id,
+  value,
+  check,
+  forLabel,
+  img
+}) => {
   return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="${id}" value="${value}" ${check}>
   <label class="film-details__emoji-label" for="${forLabel}">
     <img src="./images/emoji/${img}" width="30" height="30" alt="emoji">

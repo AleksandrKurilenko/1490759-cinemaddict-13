@@ -1,43 +1,48 @@
-const detailsStats = [
-  {
-    id: `statistic-all-time`,
-    value: `all-time`,
-    check: `checked`,
-    forLabel: `statistic-all-time`,
-    text: `All time`
-  },
-  {
-    id: `statistic-today`,
-    value: `today`,
-    check: ``,
-    forLabel: `statistic-today`,
-    text: `Today`
-  },
-  {
-    id: `statistic-week`,
-    value: `week`,
-    check: ``,
-    forLabel: `statistic-week`,
-    text: `Week`
-  },
-  {
-    id: `statistic-month`,
-    value: `month`,
-    check: ``,
-    forLabel: `statistic-month`,
-    text: `Month`
-  },
-  {
-    id: `statistic-year`,
-    value: `year`,
-    check: ``,
-    forLabel: `statistic-year`,
-    text: `Year`
-  },
+const detailsStats = [{
+  id: `statistic-all-time`,
+  value: `all-time`,
+  check: `checked`,
+  forLabel: `statistic-all-time`,
+  text: `All time`
+},
+{
+  id: `statistic-today`,
+  value: `today`,
+  check: ``,
+  forLabel: `statistic-today`,
+  text: `Today`
+},
+{
+  id: `statistic-week`,
+  value: `week`,
+  check: ``,
+  forLabel: `statistic-week`,
+  text: `Week`
+},
+{
+  id: `statistic-month`,
+  value: `month`,
+  check: ``,
+  forLabel: `statistic-month`,
+  text: `Month`
+},
+{
+  id: `statistic-year`,
+  value: `year`,
+  check: ``,
+  forLabel: `statistic-year`,
+  text: `Year`
+},
 ];
 
 
-const createStats = ({id, value, check, forLabel, text}) => {
+const createStats = ({
+  id,
+  value,
+  check,
+  forLabel,
+  text
+}) => {
   return `<input type="radio" class="statistic__filters-input visually-hidden" name="statistic-filter" id="${id}" value="${value}" ${check}>
 <label for="${forLabel}" class="statistic__filters-label">${text}</label>`;
 };
