@@ -1,69 +1,5 @@
 import {getRandomInteger} from "./utils";
 
-// const detailsCard = [
-//   {
-//     title: `The Dance of Life`,
-//     rating: getRandomInteger(0, 100) / 10,
-//     year: getRandomInteger(1900, 1974),
-//     duration: `1h 55m`,
-//     genre: `Musical`,
-//     img: `the-dance-of-life.jpg`,
-//     description: `Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…`,
-//     comments: `5 comments`,
-//     classEmpty: ``,
-//     classActive: ``
-//   },
-//   {
-//     title: `Sagebrush Trail`,
-//     rating: `3.2`,
-//     year: `1933`,
-//     duration: `54m`,
-//     genre: `Western`,
-//     img: `sagebrush-trail.jpg`,
-//     description: `Sentenced for a murder he did not commit, John Brant escapes from prison determined to find the real killer. By chance Brant's narrow escap…`,
-//     comments: `89 comments`,
-//     classEmpty: ``,
-//     classActive: `film-card__controls-item--active`
-//   },
-//   {
-//     title: `The Man with the Golden Arm`,
-//     rating: `9.0`,
-//     year: `1955`,
-//     duration: `1h 59m`,
-//     genre: `Drama`,
-//     img: `the-man-with-the-golden-arm.jpg`,
-//     description: `Frankie Machine (Frank Sinatra) is released from the federal Narcotic Farm in Lexington, Kentucky with a set of drums and a new outlook on…`,
-//     comments: `18 comments`,
-//     classEmpty: ``,
-//     classActive: `film-card__controls-item--active`
-//   },
-//   {
-//     title: `Santa Claus Conquers the Martians`,
-//     rating: `2.3`,
-//     year: `1964`,
-//     duration: `1h 21m`,
-//     genre: `Comedy`,
-//     img: `santa-claus-conquers-the-martians.jpg`,
-//     description: `The Martians Momar ("Mom Martian") and Kimar ("King Martian") are worried that their children Girmar ("Girl Martian") and Bomar ("Boy Marti…`,
-//     comments: `465 comments`,
-//     classEmpty: ``,
-//     classActive: `film-card__controls-item--active`
-//   },
-//   {
-//     title: `Popeye the Sailor Meets Sindbad the Sailor`,
-//     rating: `6.3`,
-//     year: `1936`,
-//     duration: `16m`,
-//     genre: `Cartoon`,
-//     img: `popeye-meets-sinbad.png`,
-//     description: `In this short, Sindbad the Sailor (presumably Bluto playing a "role") proclaims himself, in song, to be the greatest sailor, adventurer and…`,
-//     comments: `0 comments`,
-//     classEmpty: ``,
-//     classActive: `film-card__controls-item--active`
-//   },
-// ];
-
-
 const getTitleData = () => {
   const titleList = [
     `The Dance of Life`,
@@ -139,6 +75,5 @@ const getFilmsData = () => {
   }
   return filmsArray;
 };
-
 
 export default getFilmsData;

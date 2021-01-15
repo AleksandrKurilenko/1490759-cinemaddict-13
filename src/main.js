@@ -25,10 +25,9 @@ const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
 const FILMS = getFilmsData();
-// const CARD_NUMBER = 1;
+
 const TITLE = [`Top rated`, `Most commented`];
 
-// console.log(FILMS);
 renderElement(siteHeaderElement, new UserTemplate().getElement(), RenderPosition.BEFOREEND);
 renderElement(siteMainElement, new MenuTemplate().getElement(), RenderPosition.BEFOREEND);
 renderElement(siteMainElement, new SortMenu().getElement(), RenderPosition.BEFOREEND);
@@ -48,3 +47,12 @@ for (let j = 0; j < TITLE.length; j++) {
 }
 
 renderElement(siteFooterElement, new TotalFilmsTemplate().getElement(), RenderPosition.BEFOREEND);
+
+const listenerCard = () => {
+  const as = Array.from(document.querySelectorAll(`.film-card__title, .film-card__poster, .film-card__description`));
+
+  for (const a of as) {
+    a.addEventListener(`click`, () => {});
+  }
+};
+listenerCard();

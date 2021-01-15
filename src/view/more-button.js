@@ -1,6 +1,4 @@
-import {
-  createElement
-} from "./utils";
+import {createElement} from "./utils";
 
 const createMoreButton = () => {
   return `<button class="films-list__show-more">Show more</button>`;
@@ -23,6 +21,6 @@ export default class MoreButtonTemplate {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}

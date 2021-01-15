@@ -1,6 +1,4 @@
-import {
-  createElement
-} from "./utils";
+import {createElement} from "./utils";
 
 const sortDetailsMenu = ({
   textA,
@@ -19,17 +17,17 @@ export default class SortMenu {
   constructor() {
     this._element = null;
     this._detailsSort = [{
-        textA: `Sort by default`,
-        classSortA: ``
-      },
-      {
-        textA: `Sort by date`,
-        classSortA: ``
-      },
-      {
-        textA: `Sort by rating`,
-        classSortA: `sort__button--active`
-      }
+      textA: `Sort by default`,
+      classSortA: ``
+    },
+    {
+      textA: `Sort by date`,
+      classSortA: ``
+    },
+    {
+      textA: `Sort by rating`,
+      classSortA: `sort__button--active`
+    }
     ];
   }
 
@@ -45,6 +43,6 @@ export default class SortMenu {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}

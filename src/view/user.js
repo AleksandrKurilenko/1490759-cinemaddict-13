@@ -1,6 +1,4 @@
-import {
-  createElement
-} from "./utils";
+import {createElement} from "./utils";
 
 const createUserTemplate = () => {
   return `<section class="header__profile profile">
@@ -26,6 +24,6 @@ export default class UserTemplate {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}

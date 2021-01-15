@@ -1,6 +1,4 @@
-import {
-  createElement
-} from "./utils";
+import {createElement} from "./utils";
 
 const createTotalFilmsTemplate = () => {
   return `<p>130 291 movies inside</p>`;
@@ -23,6 +21,6 @@ export default class TotalFilmsTemplate {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}

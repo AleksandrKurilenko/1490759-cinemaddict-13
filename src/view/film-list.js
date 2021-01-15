@@ -1,8 +1,6 @@
-import {
-  createElement
-} from "./utils";
+import {createElement} from "./utils";
 
- const createFilmListTemplate = () => {
+const createFilmListTemplate = () => {
   return `<section class="films">
     <section class="films-list">
       <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
@@ -28,6 +26,6 @@ export default class FilmListTemplate {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}

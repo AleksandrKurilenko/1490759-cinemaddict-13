@@ -1,7 +1,5 @@
-import { createElement } from "./utils";
+import {createElement} from "./utils";
 import {createFilmCardTemplate} from "./film-card";
-
-
 
 const createFilmTop = (title, FILMS) => {
   return `<section class="films-list films-list--extra">
@@ -30,6 +28,6 @@ export default class FilmCardTopComponent {
   }
 
   removeElement() {
-    this._element = null
+    this._element = null;
   }
-};
+}
