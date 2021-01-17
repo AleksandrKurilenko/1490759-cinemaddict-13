@@ -1,3 +1,5 @@
+import {createElement} from "./utils";
+
 const detailsTable = [{
   term: `Director`,
   cell: `Anthony Mann`
@@ -195,3 +197,24 @@ export const createPopTemplate = () => {
   </form>
 </section>`;
 };
+
+export default class PopupTemplate {
+  constructor() {
+    this._element = null;
+  }
+
+  getPopup() {
+    return createPopTemplate(this._detailsSort);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getPopup());
+    }
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
