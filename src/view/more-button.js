@@ -1,26 +1,12 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 const createMoreButton = () => {
   return `<button class="films-list__show-more">Show more</button>`;
 };
 
-export default class MoreButtonTemplate {
-  constructor() {
-    this._element = null;
-  }
+export default class MoreButtonTemplate extends Abstract {
 
-  getMoreButton() {
+  getTemplate() {
     return createMoreButton();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getMoreButton());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

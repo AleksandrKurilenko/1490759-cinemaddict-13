@@ -1,4 +1,4 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 const sortDetailsMenu = ({
   textA,
@@ -13,9 +13,9 @@ const createSortTemplate = (detailsSort) => {
     </ul>`;
 };
 
-export default class SortMenu {
+export default class SortMenu extends Abstract {
   constructor() {
-    this._element = null;
+    super();
     this._detailsSort = [{
       textA: `Sort by default`,
       classSortA: ``
@@ -31,18 +31,7 @@ export default class SortMenu {
     ];
   }
 
-  getSort() {
+  getTemplate() {
     return createSortTemplate(this._detailsSort);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getSort());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

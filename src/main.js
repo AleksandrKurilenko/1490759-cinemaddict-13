@@ -17,7 +17,7 @@ import TotalFilmsTemplate from "./view/total-films.js";
 import getFilmsData from "./view/data.js";
 
 import {
-  renderElement,
+  render,
   RenderPosition
 } from "./view/utils.js";
 import PopupTemplate from "./view/popup.js";
@@ -29,25 +29,25 @@ const FILMS = getFilmsData();
 
 const TITLE = [`Top rated`, `Most commented`];
 
-renderElement(siteHeaderElement, new UserTemplate().getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMainElement, new MenuTemplate().getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMainElement, new SortMenu().getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMainElement, new FilmListTemplate().getElement(), RenderPosition.BEFOREEND);
+render(siteHeaderElement, new UserTemplate(), RenderPosition.BEFOREEND);
+render(siteMainElement, new MenuTemplate(), RenderPosition.BEFOREEND);
+render(siteMainElement, new SortMenu(), RenderPosition.BEFOREEND);
+render(siteMainElement, new FilmListTemplate(), RenderPosition.BEFOREEND);
 
 const filmListContainer = document.querySelector(`.films-list`);
 const siteFooterElement = document.querySelector(`.footer__statistics`);
 
-renderElement(filmListContainer, new FilmCardComponent(FILMS).getElement(), RenderPosition.BEFOREEND);
+render(filmListContainer, new FilmCardComponent(FILMS), RenderPosition.BEFOREEND);
 
-renderElement(filmListContainer, new MoreButtonTemplate().getElement(), RenderPosition.BEFOREEND);
+render(filmListContainer, new MoreButtonTemplate(), RenderPosition.BEFOREEND);
 
 const filmsElement = document.querySelector(`.films`);
 
 for (let j = 0; j < TITLE.length; j++) {
-  renderElement(filmsElement, new FilmCardTopComponent(TITLE[j], FILMS.slice(0, 2)).getElement(), RenderPosition.BEFOREEND);
+  render(filmsElement, new FilmCardTopComponent(TITLE[j], FILMS.slice(0, 2)), RenderPosition.BEFOREEND);
 }
 
-renderElement(siteFooterElement, new TotalFilmsTemplate().getElement(), RenderPosition.BEFOREEND);
+render(siteFooterElement, new TotalFilmsTemplate(), RenderPosition.BEFOREEND);
 
 const siteFooter = document.querySelector(`.footer`);
 const bodyElement = document.querySelector(`body`);
@@ -81,11 +81,9 @@ const removeCard = () => {
   bodyElement.classList.remove(`hide-overflow`);
 };
 
-const closePopup = () => {
-  const popupCloseButton = popup.getElement().querySelector(`.film-details__close-btn`);
-  popupCloseButton.addEventListener(`click`, () => {
-    removeCard();
-  });
-};
 
-closePopup();
+popup.setEditClickHandler(() => {
+  removeCard();
+});
+
+

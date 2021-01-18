@@ -1,31 +1,18 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 const createFilmListTemplate = () => {
   return `<section class="films">
     <section class="films-list">
       <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
-      
+
     </section>
   </section>`;
 };
 
-export default class FilmListTemplate {
-  constructor() {
-    this._element = null;
-  }
+export default class FilmListTemplate extends Abstract {
 
-  getFilmList() {
+  getTemplate() {
     return createFilmListTemplate();
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getFilmList());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
 }
