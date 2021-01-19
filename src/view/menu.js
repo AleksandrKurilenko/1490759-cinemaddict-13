@@ -1,4 +1,4 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 const createMenuTemplate = () => {
   return `<nav class="main-navigation">
@@ -12,23 +12,9 @@ const createMenuTemplate = () => {
 </nav>`;
 };
 
-export default class MenuTemplate {
-  constructor() {
-    this._element = null;
-  }
+export default class MenuTemplate extends Abstract {
 
-  getSort() {
+  getTemplate() {
     return createMenuTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getSort());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

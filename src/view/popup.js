@@ -1,4 +1,4 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 const detailsTable = [{
   term: `Director`,
@@ -198,23 +198,23 @@ export const createPopTemplate = () => {
 </section>`;
 };
 
-export default class PopupTemplate {
+export default class PopupTemplate extends Abstract {
   constructor() {
-    this._element = null;
+    super();
+    this._editClickHandler = this._editClickHandler.bind(this);
   }
 
-  getPopup() {
+  getTemplate() {
     return createPopTemplate(this._detailsSort);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getPopup());
-    }
-    return this._element;
+  _editClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.editClick();
   }
 
-  removeElement() {
-    this._element = null;
+  setEditClickHandler(callback) {
+    this._callback.editClick = callback;
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._editClickHandler);
   }
 }

@@ -1,4 +1,4 @@
-import {createElement} from "./utils";
+import Abstract from "./abstract";
 
 export const createFilmTemplate = ({
   title,
@@ -30,24 +30,13 @@ export const createFilmTemplate = ({
   </article>`;
 };
 
-export default class FilmSingleTemplate {
+export default class FilmSingleTemplate extends Abstract {
   constructor(film) {
-    this._element = null;
+    super();
     this._film = film;
   }
 
-  getSingleFilm() {
+  getTemplate() {
     return createFilmTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getSingleFilm());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -1,40 +1,4 @@
-const detailsStats = [{
-  id: `statistic-all-time`,
-  value: `all-time`,
-  check: `checked`,
-  forLabel: `statistic-all-time`,
-  text: `All time`
-},
-{
-  id: `statistic-today`,
-  value: `today`,
-  check: ``,
-  forLabel: `statistic-today`,
-  text: `Today`
-},
-{
-  id: `statistic-week`,
-  value: `week`,
-  check: ``,
-  forLabel: `statistic-week`,
-  text: `Week`
-},
-{
-  id: `statistic-month`,
-  value: `month`,
-  check: ``,
-  forLabel: `statistic-month`,
-  text: `Month`
-},
-{
-  id: `statistic-year`,
-  value: `year`,
-  check: ``,
-  forLabel: `statistic-year`,
-  text: `Year`
-},
-];
-
+import Abstract from "./abstract";
 
 const createStats = ({
   id,
@@ -48,7 +12,7 @@ const createStats = ({
 };
 
 
-export const createStatsTemplate = () => {
+export const createStatsTemplate = (detailsStats) => {
   return `<section class="statistic">
  <p class="statistic__rank">
    Your rank
@@ -58,9 +22,7 @@ export const createStatsTemplate = () => {
 
  <form action="https://echo.htmlacademy.ru/" method="get" class="statistic__filters">
    <p class="statistic__filters-description">Show stats:</p>
-   ${detailsStats.map((detail) => {
-    return createStats(detail);
-  })}
+   ${detailsStats.map(createStats).join(``)}
  </form>
 
  <ul class="statistic__text-list">
@@ -84,3 +46,49 @@ export const createStatsTemplate = () => {
 
 </section>`;
 };
+
+export default class StatsMenu extends Abstract {
+  constructor() {
+    super();
+    this._detailsStats = [{
+      id: `statistic-all-time`,
+      value: `all-time`,
+      check: `checked`,
+      forLabel: `statistic-all-time`,
+      text: `All time`
+    },
+    {
+      id: `statistic-today`,
+      value: `today`,
+      check: ``,
+      forLabel: `statistic-today`,
+      text: `Today`
+    },
+    {
+      id: `statistic-week`,
+      value: `week`,
+      check: ``,
+      forLabel: `statistic-week`,
+      text: `Week`
+    },
+    {
+      id: `statistic-month`,
+      value: `month`,
+      check: ``,
+      forLabel: `statistic-month`,
+      text: `Month`
+    },
+    {
+      id: `statistic-year`,
+      value: `year`,
+      check: ``,
+      forLabel: `statistic-year`,
+      text: `Year`
+    },
+    ];
+  }
+
+  getTemplate() {
+    return createStatsTemplate(this._detailsStats);
+  }
+}
