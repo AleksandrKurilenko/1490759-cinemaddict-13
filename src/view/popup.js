@@ -148,7 +148,7 @@ export const createPopTemplate = () => {
           <table class="film-details__table">
           ${detailsTable.map((detail) => {
     return createPopupTable(detail);
-  })}
+  }).join(` `)}
             <tr class="film-details__row">
               <td class="film-details__term">Genres</td>
               <td class="film-details__cell">
@@ -167,7 +167,7 @@ export const createPopTemplate = () => {
       <section class="film-details__controls">
       ${detailsСheckbox.map((detail) => {
     return createPopupСheckbox(detail);
-  })}
+  }).join(` `)}
       </section>
     </div>
 
@@ -189,7 +189,7 @@ export const createPopTemplate = () => {
           <div class="film-details__emoji-list">
           ${detailsEmoji.map((detail) => {
     return createPopupEmoji(detail);
-  })}
+  }).join(` `)}
           </div>
         </div>
       </section>
