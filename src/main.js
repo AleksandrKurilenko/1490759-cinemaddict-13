@@ -1,57 +1,23 @@
 import UserTemplate from "./view/user.js";
-
-import MenuTemplate from "./view/menu.js";
-
-import SortMenu from "./view/sort.js";
-
-import FilmListTemplate from "./view/film-list.js";
-
-import FilmCardComponent from "./view/film-card.js";
-
-import MoreButtonTemplate from "./view/more-button.js";
-
-import FilmCardTopComponent from "./view/films-top.js";
-
-import TotalFilmsTemplate from "./view/total-films.js";
-
 import getFilmsData from "./view/data.js";
-
-import {
-  render,
-  RenderPosition
-} from "./view/utils.js";
+import {render, RenderPosition} from "./view/utils.js";
 import PopupTemplate from "./view/popup.js";
+import Board from "./presenter/movieList.js";
 
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
 const FILMS = getFilmsData();
-
 const TITLE = [`Top rated`, `Most commented`];
 
 render(siteHeaderElement, new UserTemplate(), RenderPosition.BEFOREEND);
-render(siteMainElement, new MenuTemplate(), RenderPosition.BEFOREEND);
-render(siteMainElement, new SortMenu(), RenderPosition.BEFOREEND);
-render(siteMainElement, new FilmListTemplate(), RenderPosition.BEFOREEND);
 
-const filmListContainer = document.querySelector(`.films-list`);
-const siteFooterElement = document.querySelector(`.footer__statistics`);
-
-render(filmListContainer, new FilmCardComponent(FILMS), RenderPosition.BEFOREEND);
-
-render(filmListContainer, new MoreButtonTemplate(), RenderPosition.BEFOREEND);
-
-const filmsElement = document.querySelector(`.films`);
-
-for (let j = 0; j < TITLE.length; j++) {
-  render(filmsElement, new FilmCardTopComponent(TITLE[j], FILMS.slice(0, 2)), RenderPosition.BEFOREEND);
-}
-
-render(siteFooterElement, new TotalFilmsTemplate(), RenderPosition.BEFOREEND);
+const boardPresenter = new Board(siteMainElement, TITLE, FILMS);
+boardPresenter.init();
 
 const siteFooter = document.querySelector(`.footer`);
 const bodyElement = document.querySelector(`body`);
-// const sitePopupElement = document.querySelector(`.film-details`);
+
 const popup = new PopupTemplate();
 
 const listenerCard = () => {
@@ -86,4 +52,8 @@ popup.setEditClickHandler(() => {
   removeCard();
 });
 
+// const buttonWatchList = document.querySelector(`.film-card__controls-item--add-to-watchlist`);
 
+// const buttonWatched = document.querySelector(`.film-card__controls-item--mark-as-watched`);
+
+// const buttonFavorite = document.querySelector(`.film-card__controls-item:last-of-type`);
