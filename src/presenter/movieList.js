@@ -8,11 +8,12 @@ import {render, RenderPosition} from "../view/utils";
 import FilmListTemplate from "../view/film-list.js";
 import TotalFilmsTemplate from "../view/total-films";
 
+const FILMS_COUNT = 5;
+
 // const FILMS = getFilmsData();
 export default class Board {
   constructor(siteMainContainer, titles, films) {
     this._siteMainContainer = siteMainContainer;
-    // this._userTemplate = new UserTemplate();
     this._menuTemplate = new MenuTemplate();
     this._sortComponent = new SortMenu();
     this._filmListTemplate = new FilmListTemplate();
@@ -20,6 +21,7 @@ export default class Board {
     this._totalFilms = new TotalFilmsTemplate();
     this._titles = titles;
     this._films = films;
+    this._renderedFilmCount = null;
   }
 
   init(boardTasks) {
@@ -46,6 +48,7 @@ export default class Board {
 
   _renderSort() {
     render(this._siteMainContainer, this._sortComponent, RenderPosition.BEFOREEND);
+    this._sortComponent.setSortChangeHandler(this._handleSortChange);
   }
 
   _renderfilmListTemplate() {
@@ -53,16 +56,31 @@ export default class Board {
   }
 
   _renderFilms() {
-    this._filmListContainer = document.querySelector(`.films-list`);
+    this._filmsElement = this._siteMainContainer.querySelector(`.films`);
+    this._filmListContainer = this._filmsElement.querySelector(`.films-list`);
+    // const filmListContainer = this._filmsElement.querySelector(`.films-list__container`);
     render(this._filmListContainer, new FilmCardComponent(this._films), RenderPosition.BEFOREEND);
   }
 
   _renderLoadMoreButton() {
-    render(this._filmListContainer, this._moreButton, RenderPosition.BEFOREEND);
+    // render(this._filmListContainer, this._moreButton, RenderPosition.BEFOREEND);
+    if (this._films.length > FILMS_COUNT) {
+      render(this._filmListContainer, this._moreButton, RenderPosition.BEFOREEND);
+
+      this._moreButton.setClickHandler(() => {
+        this._renderFilms();
+
+        this._renderedFilmCount += FILMS_COUNT;
+
+        if (this._renderedFilmCount >= this._films.length) {
+          this._moreButton.getElement().remove();
+          this._moreButton.removeElement();
+        }
+      });
+    }
   }
 
   _renderFilmsTop() {
-    this._filmsElement = document.querySelector(`.films`);
     for (let j = 0; j < this._titles.length; j++) {
       render(this._filmsElement, new FilmCardTopComponent(this._titles[j], this._films.slice(0, 2)), RenderPosition.BEFOREEND);
     }

@@ -202,6 +202,9 @@ export default class PopupTemplate extends Abstract {
   constructor() {
     super();
     this._editClickHandler = this._editClickHandler.bind(this);
+    this._onWatchedlistClick = this._onWatchedlistClick.bind(this);
+    this._onWatchlistClick = this._onWatchlistClick.bind(this);
+    this._onFavoriteClick = this._onFavoriteClick.bind(this);
   }
 
   getTemplate() {
@@ -217,4 +220,36 @@ export default class PopupTemplate extends Abstract {
     this._callback.editClick = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._editClickHandler);
   }
+
+  _onFavoriteClick(evt) {
+    evt.preventDefault();
+    this._callback.favoriteClick();
+  }
+
+  setFavoriteClickHandler(callback) {
+    this._callback.favoriteClick = callback;
+    this.getElement().querySelector(`input[name="favorite"]`).addEventListener(`change`, this._onFavoriteClick);
+
+  }
+
+  setWatchlistClickHandler(callback) {
+    this._callback.watchlistClick = callback;
+    this.getElement().querySelector(`input[name="watchlist"]`).addEventListener(`change`, this._onWatchlistClick);
+  }
+
+  _onWatchlistClick(evt) {
+    evt.preventDefault();
+    this._callback.watchlistClick();
+  }
+
+  setWatchedlistClickHandler(callback) {
+    this._callback.watchedlistClick = callback;
+    this.getElement().querySelector(`input[name="watched"`).addEventListener(`change`, this._onWatchedlistClick);
+  }
+
+  _onWatchedlistClick(evt) {
+    evt.preventDefault();
+    this._callback.watchedlistClick();
+  }
+
 }

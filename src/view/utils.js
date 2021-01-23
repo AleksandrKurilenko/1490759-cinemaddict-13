@@ -1,5 +1,6 @@
 import Abstract from "./abstract";
-
+import {getRandomInteger} from "./common";
+import days from "dayjs";
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
@@ -44,7 +45,7 @@ export const generateFilter = (filmCard) => {
   });
 };
 
-const filmToFilterMap = {
+export const filmToFilterMap = {
   all: (filmCard) => filmCard.length,
   watchlist: (filmCard) => filmCard
     .filter((el) => el.watchList).length,
@@ -52,4 +53,37 @@ const filmToFilterMap = {
     .filter((el) => el.watched).length,
   favorites: (filmCard) => filmCard
     .filter((el) => el.favorite).length,
+};
+
+export const resultHoursMins = (mins) => {
+  let hours = Math.trunc(mins / 60);
+  let minutes = mins % 60;
+  return [hours, minutes];
+};
+
+export const generateYear = (day, month, year, format) => {
+  const maxDaysGap = day;
+  const maxMonthGap = month;
+  const maxYearsGap = year;
+  const daysGap = getRandomInteger(-maxDaysGap, 1);
+  const monthGap = getRandomInteger(-maxMonthGap, 1);
+  const yearsGap = getRandomInteger(-maxYearsGap, 0);
+
+  return days()
+    .add(daysGap, `day`)
+    .add(monthGap, `month`)
+    .add(yearsGap, `years`)
+    .format(format);
+};
+
+export const generateArray = (array) => {
+  const randomArray = [];
+  const randomNumber = getRandomInteger(1, array.length);
+  for (let j = 0; j < randomNumber; j++) {
+    const randomItem = getRandomInteger(0, randomNumber - 1);
+    randomArray.push(array[randomItem]);
+  }
+
+  const unique = [...new Set(randomArray)];
+  return unique;
 };
