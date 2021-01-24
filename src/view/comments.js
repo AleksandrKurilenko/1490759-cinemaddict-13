@@ -1,5 +1,4 @@
 import {getRandomItem} from "./data";
-import {generateYear} from "./utils";
 
 const EMOJI = [`angry.png`, `puke.png`, `sleeping.png`, `smile.png`];
 const AUTHOR = [`Bill`, `Maximilian`, `Vladilen`, `Lex`];
@@ -8,7 +7,7 @@ const TEXT = [`hello`, `good`, `bad`, `good day`];
 const generateComment = () => {
   return {
     emoji: getRandomItem(EMOJI),
-    commentDate: generateYear(30, 12, 5, `YYYY/MM/DD HH:MM`),
+    commentDate: new Date().getFullYear(30, 12, 5, `YYYY/MM/DD HH:MM`),
     author: getRandomItem(AUTHOR),
     text: getRandomItem(TEXT),
   };

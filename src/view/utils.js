@@ -1,6 +1,6 @@
 import Abstract from "./abstract";
 import {getRandomInteger} from "./common";
-import days from "dayjs";
+
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
@@ -61,21 +61,6 @@ export const resultHoursMins = (mins) => {
   return [hours, minutes];
 };
 
-export const generateYear = (day, month, year, format) => {
-  const maxDaysGap = day;
-  const maxMonthGap = month;
-  const maxYearsGap = year;
-  const daysGap = getRandomInteger(-maxDaysGap, 1);
-  const monthGap = getRandomInteger(-maxMonthGap, 1);
-  const yearsGap = getRandomInteger(-maxYearsGap, 0);
-
-  return days()
-    .add(daysGap, `day`)
-    .add(monthGap, `month`)
-    .add(yearsGap, `years`)
-    .format(format);
-};
-
 export const generateArray = (array) => {
   const randomArray = [];
   const randomNumber = getRandomInteger(1, array.length);
@@ -86,4 +71,16 @@ export const generateArray = (array) => {
 
   const unique = [...new Set(randomArray)];
   return unique;
+};
+
+export const remove = (element) => {
+  if (element === null) {
+    return;
+  }
+
+  if (!(element instanceof Abstract)) {
+    throw new Error(`Can remove view components only`);
+  }
+  element.getElement().remove();
+  element.removeElement();
 };

@@ -3,7 +3,7 @@ import FilmCardComponent from "../view/film-card";
 import FilmCardTopComponent from "../view/films-top";
 import MenuTemplate from "../view/menu";
 import MoreButtonTemplate from "../view/more-button";
-import SortMenu from "../view/sort";
+import SortMenu, {SortType} from "../view/sort";
 import {render, RenderPosition} from "../view/utils";
 import FilmListTemplate from "../view/film-list.js";
 import TotalFilmsTemplate from "../view/total-films";
@@ -22,10 +22,14 @@ export default class Board {
     this._titles = titles;
     this._films = films;
     this._renderedFilmCount = null;
+    this._currentSortType = SortType.DEFAULT;
+    this._onSortTypeChange = this._onSortTypeChange.bind(this);
   }
 
-  init(boardTasks) {
-    this._boardTasks = boardTasks;
+  init(container = this._container) {
+    this._container = container;
+    this._siteMain = container;
+
     // this._renderUserTemplate();
     this._renderMenu();
     this._renderSort();
@@ -46,10 +50,29 @@ export default class Board {
     render(this._siteMainContainer, this._menuTemplate, RenderPosition.BEFOREEND);
   }
 
-  _renderSort() {
-    render(this._siteMainContainer, this._sortComponent, RenderPosition.BEFOREEND);
-    this._sortComponent.setSortChangeHandler(this._handleSortChange);
+  _onSortTypeChange(type) {
+    if (this._currentSortType === type) {
+      return;
+    }
+    if (!this._sortButtons) {
+      this._sortButtons = Array.from(this._sortComponent.getElement().querySelectorAll(`.sort__button`));
+    }
+    this._sortButtons.forEach((sortButton) => {
+      if (sortButton.dataset.sortType === type) {
+        sortButton.classList.add(`sort__button--active`);
+        return;
+      }
+      sortButton.classList.remove(`sort__button--active`);
+    });
+    this._currentSortType = type;
   }
+
+  _renderSort() {
+    this._sortComponent = new SortMenu(this._currentSortType);
+    render(this._siteMainContainer, this._sortComponent, RenderPosition.BEFOREEND);
+    this._sortComponent.setSortTypeChangeHandler(this._onSortTypeChange);
+  }
+
 
   _renderfilmListTemplate() {
     render(this._siteMainContainer, this._filmListTemplate, RenderPosition.BEFOREEND);

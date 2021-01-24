@@ -1,6 +1,6 @@
 import {generateComments} from "./comments";
 import {getRandomInteger} from "./common";
-import {generateArray, generateYear} from "./utils";
+import {generateArray} from "./utils";
 
 const FILM_NAMES = [
   `Made for each other`,
@@ -58,33 +58,33 @@ const generateDiscription = () => {
   return result;
 };
 
-const generateFilm = () => {
-  return {
-    id: Math.random(),
-    filmName: getRandomItem(FILM_NAMES),
-    poster: getRandomItem(POSTERS),
-    description: generateDiscription(),
-    rating: getRandomInteger(0, 8),
-    ageLimit: getRandomItem(AGE_LIMITS),
-    year: generateYear(30, 12, 60),
-    duration: getRandomInteger(0, 239),
-    director: generateArray(STARS),
-    writers: generateArray(STARS),
-    actors: generateArray(STARS),
-    country: generateArray(COUNTRYS),
-    genre: generateArray(GENRES),
-    watched: Boolean(getRandomInteger(0, 1)),
-    watchList: Boolean(getRandomInteger(0, 1)),
-    favorite: Boolean(getRandomInteger(0, 1)),
-    comments: generateComments(getRandomInteger(0, 5)),
-  };
-};
+// const generateFilm = () => {
+//   return {
+//     id: Math.random(),
+//     filmName: getRandomItem(FILM_NAMES),
+//     poster: getRandomItem(POSTERS),
+//     description: generateDiscription(),
+//     rating: getRandomInteger(0, 8),
+//     ageLimit: getRandomItem(AGE_LIMITS),
+//     year: generateYear(30, 12, 60),
+//     duration: getRandomInteger(0, 239),
+//     director: generateArray(STARS),
+//     writers: generateArray(STARS),
+//     actors: generateArray(STARS),
+//     country: generateArray(COUNTRYS),
+//     genre: generateArray(GENRES),
+//     watched: Boolean(getRandomInteger(0, 1)),
+//     watchList: Boolean(getRandomInteger(0, 1)),
+//     favorite: Boolean(getRandomInteger(0, 1)),
+//     comments: generateComments(getRandomInteger(0, 5)),
+//   };
+// };
 
 const getFilmsData = () => {
   const count = getRandomInteger(2, 15);
   const filmsArray = [];
   for (let i = 0; i < count; i++) {
-    filmsArray.push(generateFilm());
+    filmsArray.push(generateFilmCard());
   }
   return filmsArray;
 };
@@ -99,7 +99,7 @@ export const generateFilmCard = () => {
     description: generateDiscription(),
     rating: getRandomInteger(0, 8),
     ageLimit: getRandomItem(AGE_LIMITS),
-    year: generateYear(30, 12, 60),
+    year: new Date().getFullYear(),
     duration: getRandomInteger(0, 239),
     director: generateArray(STARS),
     writers: generateArray(STARS),
