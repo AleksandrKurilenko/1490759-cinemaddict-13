@@ -1,13 +1,16 @@
-import Abstract from "./abstract";
+import Abstract from './abstract';
 
-const createTotalFilmsTemplate = () => {
-  return `<p>130 291 movies inside</p>`;
+const createTotalFilmsTemplate = (filmsNumber) => {
+  return `<p>${filmsNumber} movies inside</p>`;
 };
 
 export default class TotalFilmsTemplate extends Abstract {
-
-  getTemplate() {
-    return createTotalFilmsTemplate();
+  constructor(filmsNumber) {
+    super();
+    this._filmsNumber = filmsNumber;
   }
 
+  getTemplate() {
+    return createTotalFilmsTemplate(this._filmsNumber);
+  }
 }

@@ -47,7 +47,7 @@ export const createStatsTemplate = (detailsStats) => {
 </section>`;
 };
 
-export default class StatsMenu extends Abstract {
+export default class Stats extends Abstract {
   constructor() {
     super();
     this._detailsStats = [{

@@ -1,125 +1,52 @@
-import Abstract from "./abstract";
+import Smart from './smart';
+import dayjs from "dayjs";
+import {EMOTIONS, Category} from '../data.js';
+import {getDuration} from '../utils';
 
-const detailsTable = [{
-  term: `Director`,
-  cell: `Anthony Mann`
-},
-{
-  term: `Writers`,
-  cell: `Anne Wigton, Heinz Herald, Richard Weil`,
-},
-{
-  term: `Actors`,
-  cell: `Erich von Stroheim, Mary Beth Hughes, Dan Duryea`,
-},
-{
-  term: `Release Date`,
-  cell: `30 March 1945`,
-},
-{
-  term: `Runtime`,
-  cell: `1h 18m`,
-},
-{
-  term: `Country`,
-  cell: `USA`,
-},
-];
+const createPopTemplate = (data) => {
+  const {
+    title,
+    originalTitle,
+    raiting,
+    date,
+    duration,
+    genre,
+    poster,
+    description,
+    comments,
+    director,
+    writers,
+    actors,
+    country,
+    age,
+    userComment,
+    chosenSmile,
+    isInWatchlist,
+    isInHistory,
+    isFavourite
+  } = data;
 
-
-const detailsСheckbox = [{
-  id: `watchlist`,
-  name: `watchlist`,
-  forLabel: `watchlist`,
-  classLabel: `film-details__control-label--watchlist`,
-  text: `Add to watchlist`
-},
-{
-  id: `watched`,
-  name: `watched`,
-  forLabel: `watched`,
-  classLabel: `film-details__control-label--watched`,
-  text: `Already watched`
-},
-{
-  id: `favorite`,
-  name: `favorite`,
-  forLabel: `watchlist`,
-  classLabel: `film-details__control-label--favorite`,
-  text: `Add to favorites`
-}
-];
+  const genres = genre.map((index) => {
+    return `<span class="film-details__genre">${genre[index]}</span>`;
+  }).join(``);
 
 
-const detailsEmoji = [{
-  id: `emoji-smile`,
-  value: `smile`,
-  check: `checked`,
-  forLabel: `emoji-smile`,
-  img: `smile.png`
-},
-{
-  id: `emoji-sleeping`,
-  value: `sleeping`,
-  check: ``,
-  forLabel: `emoji-sleeping`,
-  img: `sleeping.png`
-},
-{
-  id: `emoji-puke`,
-  value: `puke`,
-  check: ``,
-  forLabel: `emoji-puke`,
-  img: `puke.png`
-},
-{
-  id: `emoji-angry`,
-  value: `angry`,
-  check: ``,
-  forLabel: `emoji-angry`,
-  img: `angry.png`
-}
-];
+  const emojiRadio = EMOTIONS.map((index) => {
+    const emotion = EMOTIONS[index];
+    return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emotion}" value="${emotion}"${(emotion === chosenSmile) ? ` checked` : ``}>
+    <label class="film-details__emoji-label" for="emoji-${emotion}">
+      <img src="./images/emoji/${emotion}.png" width="30" height="30" alt="emoji">
+    </label>`;
+  }).join(``);
 
+  const smileImg = chosenSmile ? `<img src="./images/emoji/${chosenSmile}.png" width="55" height="55" alt="emoji-${chosenSmile}">` : ``;
 
-const createPopupTable = ({
-  term,
-  cell
-}) => {
-  return `<tr class="film-details__row">
-<td class="film-details__term">${term}</td>
-<td class="film-details__cell">${cell}</td>
-</tr>`;
-};
+  const commentValue = userComment || ``;
 
+  const getFilmStatusClass = (property) => {
+    return property ? ` checked` : ``;
+  };
 
-const createPopupСheckbox = ({
-  id,
-  name,
-  forLabel,
-  classLabel,
-  text
-}) => {
-  return `<input type="checkbox" class="film-details__control-input visually-hidden" id="${id}" name="${name}">
-  <label for="${forLabel}" class="film-details__control-label ${classLabel}">${text}</label>`;
-};
-
-
-const createPopupEmoji = ({
-  id,
-  value,
-  check,
-  forLabel,
-  img
-}) => {
-  return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="${id}" value="${value}" ${check}>
-  <label class="film-details__emoji-label" for="${forLabel}">
-    <img src="./images/emoji/${img}" width="30" height="30" alt="emoji">
-  </label>`;
-};
-
-
-export const createPopTemplate = () => {
   return `<section class="film-details">
   <form class="film-details__inner" action="" method="get">
     <div class="film-details__top-container">
@@ -128,68 +55,90 @@ export const createPopTemplate = () => {
       </div>
       <div class="film-details__info-wrap">
         <div class="film-details__poster">
-          <img class="film-details__poster-img" src="./images/posters/the-great-flamarion.jpg" alt="">
+          <img class="film-details__poster-img" src="${poster}" alt="">
 
-          <p class="film-details__age">18+</p>
+          <p class="film-details__age">${age}+</p>
         </div>
 
         <div class="film-details__info">
           <div class="film-details__info-head">
             <div class="film-details__title-wrap">
-              <h3 class="film-details__title">The Great Flamarion</h3>
-              <p class="film-details__title-original">Original: The Great Flamarion</p>
+              <h3 class="film-details__title">${title}</h3>
+              <p class="film-details__title-original">Original: ${originalTitle}</p>
             </div>
 
             <div class="film-details__rating">
-              <p class="film-details__total-rating">8.9</p>
+              <p class="film-details__total-rating">${raiting}</p>
             </div>
           </div>
 
           <table class="film-details__table">
-          ${detailsTable.map((detail) => {
-    return createPopupTable(detail);
-  }).join(` `)}
+            <tr class="film-details__row">
+              <td class="film-details__term">Director</td>
+              <td class="film-details__cell">${director}</td>
+            </tr>
+            <tr class="film-details__row">
+              <td class="film-details__term">Writers</td>
+              <td class="film-details__cell">${writers.join(`, `)}</td>
+            </tr>
+            <tr class="film-details__row">
+              <td class="film-details__term">Actors</td>
+              <td class="film-details__cell">${actors.join(`, `)}</td>
+            </tr>
+            <tr class="film-details__row">
+              <td class="film-details__term">Release Date</td>
+              <td class="film-details__cell">${dayjs(date).format(`DD MMMM YYYY`)}</td>
+            </tr>
+            <tr class="film-details__row">
+              <td class="film-details__term">Runtime</td>
+              <td class="film-details__cell">${getDuration(duration)}</td>
+            </tr>
+            <tr class="film-details__row">
+              <td class="film-details__term">Country</td>
+              <td class="film-details__cell">${country}</td>
+            </tr>
             <tr class="film-details__row">
               <td class="film-details__term">Genres</td>
               <td class="film-details__cell">
-                <span class="film-details__genre">Drama</span>
-                <span class="film-details__genre">Film-Noir</span>
-                <span class="film-details__genre">Mystery</span></td>
+                ${genres}
             </tr>
           </table>
 
           <p class="film-details__film-description">
-            The film opens following a murder at a cabaret in Mexico City in 1936, and then presents the events leading up to it in flashback. The Great Flamarion (Erich von Stroheim) is an arrogant, friendless, and misogynous marksman who displays his trick gunshot act in the vaudeville circuit. His show features a beautiful assistant, Connie (Mary Beth Hughes) and her drunken husband Al (Dan Duryea), Flamarion's other assistant. Flamarion falls in love with Connie, the movie's femme fatale, and is soon manipulated by her into killing her no good husband during one of their acts.
+          ${description}
           </p>
         </div>
       </div>
 
       <section class="film-details__controls">
-      ${detailsСheckbox.map((detail) => {
-    return createPopupСheckbox(detail);
-  }).join(` `)}
+        <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist"${getFilmStatusClass(isInWatchlist)}>
+        <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
+
+        <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched"${getFilmStatusClass(isInHistory)}>
+        <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
+
+        <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite"${getFilmStatusClass(isFavourite)}>
+        <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
       </section>
     </div>
 
     <div class="film-details__bottom-container">
       <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">0</span></h3>
+        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
 
         <ul class="film-details__comments-list"></ul>
 
         <div class="film-details__new-comment">
           <div class="film-details__add-emoji-label">
-            <img src="images/emoji/smile.png" width="55" height="55" alt="emoji-smile">
+            ${smileImg}
           </div>
 
           <label class="film-details__comment-label">
-            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment">Great movie!</textarea>
+            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment">${commentValue}</textarea>
           </label>
 
           <div class="film-details__emoji-list">
-          ${detailsEmoji.map((detail) => {
-    return createPopupEmoji(detail);
-  }).join(` `)}
+          ${emojiRadio}
           </div>
         </div>
       </section>
@@ -198,58 +147,146 @@ export const createPopTemplate = () => {
 </section>`;
 };
 
-export default class PopupTemplate extends Abstract {
-  constructor() {
+const SHAKE_DURATION = 500;
+
+export default class PopupTemplate extends Smart {
+  constructor(film, onCardUpdate, renderCommentsCb) {
     super();
-    this._editClickHandler = this._editClickHandler.bind(this);
-    this._onWatchedlistClick = this._onWatchedlistClick.bind(this);
-    this._onWatchlistClick = this._onWatchlistClick.bind(this);
-    this._onFavoriteClick = this._onFavoriteClick.bind(this);
+    this._onCardUpdate = onCardUpdate;
+    this._renderComments = renderCommentsCb;
+    this._data = this._parseFilmTodata(film);
+    this._isCommentFormDisabled = false;
+    this._isOnlineListening = false;
+
+    this._onCrossClick = this._onCrossClick.bind(this);
+    this._onCommentChange = this._onCommentChange.bind(this);
+    this._onEmojiInputClick = this._onEmojiInputClick.bind(this);
+    this._onWatchlistButtonClick = this._onWatchlistButtonClick.bind(this);
+    this._onHistoryButtonClick = this._onHistoryButtonClick.bind(this);
+    this._onFavouritesButtonClick = this._onFavouritesButtonClick.bind(this);
+    this.onCommentFormError = this.onCommentFormError.bind(this);
+
+    this._setHandlers();
   }
 
   getTemplate() {
-    return createPopTemplate(this._detailsSort);
+    return createPopTemplate(this._data);
   }
 
-  _editClickHandler(evt) {
+  _parseFilmTodata(film) {
+    return Object.assign({}, film, {userComment: ``, chosenSmile: ``, scroll: null});
+  }
+
+  changeComment(sentComments) {
+    this._getScroll();
+    this.updateData({comments: sentComments});
+  }
+
+  _parseDataToFilm(data) {
+    data = Object.assign({}, data);
+    delete data.userComment;
+    delete data.chosenSmile;
+    delete data.scroll;
+    return data;
+  }
+
+  _onCrossClick(evt) {
     evt.preventDefault();
-    this._callback.editClick();
+    this._callback.crossClick(evt);
   }
 
-  setEditClickHandler(callback) {
-    this._callback.editClick = callback;
-    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._editClickHandler);
-  }
-
-  _onFavoriteClick(evt) {
+  _onCommentChange(evt) {
+    if (evt.target.value.length && !this._isOnlineListening) {
+      this._isOnlineListening = true;
+      window.addEventListener(`offline`, this.onCommentFormError);
+    }
+    if (evt.target.value.length === 0 && this._isOnlineListening) {
+      this._isOnlineListening = false;
+      window.removeEventListener(`offline`, this.onCommentFormError);
+    }
     evt.preventDefault();
-    this._callback.favoriteClick();
+    this.updateData({userComment: evt.target.value}, true);
   }
 
-  setFavoriteClickHandler(callback) {
-    this._callback.favoriteClick = callback;
-    this.getElement().querySelector(`input[name="favorite"]`).addEventListener(`change`, this._onFavoriteClick);
-
+  _onEmojiInputClick(evt) {
+    if (evt.target.tagName !== `INPUT` || evt.target.value === this._data.chosenSmile) {
+      return;
+    }
+    this._getScroll();
+    this.updateData({chosenSmile: evt.target.value});
+    this._renderComments(true);
   }
 
-  setWatchlistClickHandler(callback) {
-    this._callback.watchlistClick = callback;
-    this.getElement().querySelector(`input[name="watchlist"]`).addEventListener(`change`, this._onWatchlistClick);
+  _onWatchlistButtonClick() {
+    this._onCardUpdate(Category.WATCHLIST);
+    this._data.isInWatchlist = !this._data.isInWatchlist;
   }
 
-  _onWatchlistClick(evt) {
-    evt.preventDefault();
-    this._callback.watchlistClick();
+  _onHistoryButtonClick() {
+    this._onCardUpdate(Category.HISTORY);
+    this._data.isInHistory = !this._data.isInHistory;
   }
 
-  setWatchedlistClickHandler(callback) {
-    this._callback.watchedlistClick = callback;
-    this.getElement().querySelector(`input[name="watched"`).addEventListener(`change`, this._onWatchedlistClick);
+  _onFavouritesButtonClick() {
+    this._onCardUpdate(Category.FAVOURITES);
+    this._data.isInFavourites = !this._data.isInFavourites;
   }
 
-  _onWatchedlistClick(evt) {
-    evt.preventDefault();
-    this._callback.watchedlistClick();
+  setCrossClickHandler(cb) {
+    this._callback.crossClick = cb;
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._onCrossClick);
   }
 
+  _setHandlers() {
+    this.getElement().querySelector(`.film-details__comment-input`).addEventListener(`input`, this._onCommentChange);
+    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`click`, this._onEmojiInputClick);
+    this.getElement().querySelector(`#watchlist`).addEventListener(`click`, this._onWatchlistButtonClick);
+    this.getElement().querySelector(`#watched`).addEventListener(`click`, this._onHistoryButtonClick);
+    this.getElement().querySelector(`#favorite`).addEventListener(`click`, this._onFavouritesButtonClick);
+  }
+
+  _restoreHandlers() {
+    this._setHandlers();
+    this.setCrossClickHandler(this._callback.crossClick);
+  }
+
+  scrollToY() {
+    this.getElement().scroll(0, this._scroll);
+  }
+
+  _getScroll() {
+    this._scroll = this.getElement().scrollTop;
+  }
+
+  getNewCommentData() {
+    if (!this._data.chosenSmile || !this._data.userComment) {
+      return null;
+    }
+    return {
+      text: this._data.userComment,
+      emotion: this._data.chosenSmile
+    };
+  }
+
+  clearInput() {
+    this._data.chosenSmile = null;
+    this._data.userComment = null;
+    this._isCommentFormDisabled = false;
+  }
+
+  disableCommentInputs() {
+    this.getElement().querySelector(`.film-details__comment-input`).disabled = !this._isCommentFormDisabled;
+    Array.from(this.getElement().querySelectorAll(`.film-details__emoji-item`)).forEach((input) => {
+      input.disabled = !this._isCommentFormDisabled;
+    });
+    this._isCommentFormDisabled = !this._isCommentFormDisabled;
+  }
+
+  onCommentFormError() {
+    const commentForm = this.getElement().querySelector(`.film-details__new-comment`);
+    commentForm.style.animation = `shake ${SHAKE_DURATION / 1000}s`;
+    setTimeout(() => {
+      commentForm.style.animation = ``;
+    }, SHAKE_DURATION);
+  }
 }
