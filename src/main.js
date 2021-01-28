@@ -20,7 +20,7 @@ const AUTHORIZATION = `Basic serttewt34tdfwrt`;
 
 const STORE_PREFIX = `cinemaaddict-cache`;
 
-const STORE_VER = `v1`;
+const STORE_VER = `v13`;
 
 const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 // const FILMS = getFilmsData();
