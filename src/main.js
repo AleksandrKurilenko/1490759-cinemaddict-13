@@ -16,11 +16,11 @@ import UserModel from './model/user-model';
 
 const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict/`;
 
-const AUTHORIZATION = `Basic er883jdzbdw`;
+const AUTHORIZATION = `Basic serttewt34tdfwrt`;
 
-const STORE_PREFIX = `cinemaaddict-localstorage`;
+const STORE_PREFIX = `cinemaaddict-cache`;
 
-const STORE_VER = `v123`;
+const STORE_VER = `v1`;
 
 const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 // const FILMS = getFilmsData();
