@@ -6,7 +6,7 @@ import UserPresenter from './presenter/user-presenter';
 import BoardPresenter from './presenter/board-presenter';
 import MenuPresenter from './presenter/menu-presenter';
 import MovieListPresenter from './presenter/movieList-presenter';
-import FilmsModel from './model/film-model';
+import FilmModel from './model/film-model';
 import FilterModel from './model/filter-model';
 import CommentsModel from './model/comments-model';
 import Api from './api/api';
@@ -44,19 +44,28 @@ const changeSiteState = (action) => {
 const baseApi = new Api(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const api = new Provider(baseApi, store);
-const filmsModel = new FilmsModel(api);
-const userModel = new UserModel(filmsModel);
 
+const filmsModel = new FilmModel(api);
+const filterModel = new FilterModel();
+const commentsModel = new CommentsModel(api);
+const userModel = new UserModel(filmsModel);
 const siteMain = document.querySelector(`.main`);
 const header = document.querySelector(`.header`);
 const siteFooter = document.querySelector(`.footer`);
 const footerStats = siteFooter.querySelector(`.footer__statistics`);
 
-new UserPresenter(userModel).init(header);
-new MenuPresenter(filmsModel, new FilterModel(), changeSiteState).init(siteMain);
-const catalogPresenter = new BoardPresenter(filmsModel, new FilterModel(), new CommentsModel(api)).init(siteMain);
+const userPresenter = new UserPresenter(userModel);
+userPresenter.init(header);
+
+const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
+filtersPresenter.init(siteMain);
+
+const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
 catalogPresenter.init(siteMain);
-new MovieListPresenter(filmsModel).init(footerStats);
+
+const filmsCounterPresenter = new MovieListPresenter(filmsModel);
+filmsCounterPresenter.init(footerStats);
+
 
 api.getFilms()
 .then((films) => {
