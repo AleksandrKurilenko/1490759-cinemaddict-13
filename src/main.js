@@ -1,55 +1,92 @@
-import UserTemplate from "./view/user.js";
-import getFilmsData from "./view/data.js";
-import {render, RenderPosition} from "./view/utils.js";
-import PopupTemplate from "./view/popup.js";
-import Board from "./presenter/movieList.js";
+// import getFilmsData from "../view/data";
+import {remove, render, renderToast} from './utils';
+import Stats from './view/stats';
+import {SiteState} from './data';
+import UserPresenter from './presenter/user-presenter';
+import BoardPresenter from './presenter/board-presenter';
+import MenuPresenter from './presenter/menu-presenter';
+import MovieListPresenter from './presenter/movieList-presenter';
+import FilmModel from './model/film-model';
+import FilterModel from './model/filter-model';
+import CommentsModel from './model/comments-model';
+import Api from './api/api';
+import Provider from './api/provider';
+import Store from './api/store';
+import UserModel from './model/user-model';
 
-const siteHeaderElement = document.querySelector(`.header`);
-const siteMainElement = document.querySelector(`.main`);
+const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict/`;
 
-const FILMS = getFilmsData();
-const TITLE = [`Top rated`, `Most commented`];
+const AUTHORIZATION = `Basic serttewt34tdfwrt`;
 
-render(siteHeaderElement, new UserTemplate(), RenderPosition.BEFOREEND);
+const STORE_PREFIX = `cinemaaddict-cache`;
 
-const boardPresenter = new Board(siteMainElement, TITLE, FILMS);
-boardPresenter.init();
+const STORE_VER = `v13`;
 
+const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
+// const FILMS = getFilmsData();
+// const TITLE = [`Top rated`, `Most commented`];
+let stats;
+
+const changeSiteState = (action) => {
+  switch (action) {
+    case SiteState.TO_MOVIES:
+      catalogPresenter.init();
+      remove(stats);
+      break;
+    case SiteState.TO_STATS:
+      catalogPresenter.destroy();
+      stats = new Stats(filmsModel.getFilms(), userModel.getRaiting());
+      render(siteMain, stats);
+      break;
+  }
+};
+
+const baseApi = new Api(END_POINT, AUTHORIZATION);
+const store = new Store(STORE_NAME, window.localStorage);
+const api = new Provider(baseApi, store);
+
+const filmsModel = new FilmModel(api);
+const filterModel = new FilterModel();
+const commentsModel = new CommentsModel(api);
+const userModel = new UserModel(filmsModel);
+const siteMain = document.querySelector(`.main`);
+const header = document.querySelector(`.header`);
 const siteFooter = document.querySelector(`.footer`);
-const bodyElement = document.querySelector(`body`);
+const footerStats = siteFooter.querySelector(`.footer__statistics`);
 
-const popup = new PopupTemplate();
+const userPresenter = new UserPresenter(userModel);
+userPresenter.init(header);
 
-const listenerCard = () => {
-  const as = Array.from(document.querySelectorAll(`.film-card__title, .film-card__poster, .film-card__description`));
+const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
+filtersPresenter.init(siteMain);
 
-  for (const a of as) {
-    a.addEventListener(`click`, () => {
-      siteFooter.appendChild(popup.getElement());
-      bodyElement.classList.add(`hide-overflow`);
-      document.addEventListener(`keydown`, onEsc);
-    });
-  }
-};
+const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
+catalogPresenter.init(siteMain);
 
-listenerCard();
-
-const onEsc = (evt) => {
-  if (evt.key === `Escape` || evt.key === `Esc`) {
-    evt.preventDefault();
-    removeCard();
-    document.removeEventListener(`keydown`, onEsc);
-  }
-};
-
-const removeCard = () => {
-  siteFooter.removeChild(popup.getElement());
-  bodyElement.classList.remove(`hide-overflow`);
-};
+const filmsCounterPresenter = new MovieListPresenter(filmsModel);
+filmsCounterPresenter.init(footerStats);
 
 
-popup.setEditClickHandler(() => {
-  removeCard();
+api.getFilms()
+.then((films) => {
+  filmsModel.setFilms(films);
+})
+.catch(() => {
+  filmsModel.setFilms([]);
+});
+
+window.addEventListener(`load`, () => {
+  navigator.serviceWorker.register(`/sw.js`);
+});
+
+window.addEventListener(`online`, () => {
+  document.title = document.title.replace(` [offline]`, ``);
+  api.sync();
+});
+
+window.addEventListener(`offline`, () => {
+  document.title += ` [offline]`;
+  renderToast(`Lost connection`);
 });
 
 // const buttonWatchList = document.querySelector(`.film-card__controls-item--add-to-watchlist`);

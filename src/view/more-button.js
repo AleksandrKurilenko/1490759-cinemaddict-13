@@ -1,4 +1,4 @@
-import Abstract from "./abstract";
+import Abstract from './abstract';
 
 const createMoreButton = () => {
   return `<button class="films-list__show-more">Show more</button>`;
@@ -8,20 +8,19 @@ export default class MoreButtonTemplate extends Abstract {
   constructor() {
     super();
 
-    this._clickHandler = this._clickHandler.bind(this);
+    this._onShowMoreButtonClick = this._onShowMoreButtonClick.bind(this);
   }
-
   getTemplate() {
     return createMoreButton();
   }
 
-  _clickHandler(evt) {
+  _onShowMoreButtonClick(evt) {
     evt.preventDefault();
-    this._callback.click();
+    this._callback.click(evt);
   }
 
-  setClickHandler(callback) {
-    this._callback.click = callback;
-    this.getElement().addEventListener(`click`, this._clickHandler);
+  setClickHandler(cb) {
+    this._callback.click = cb;
+    this.getElement().addEventListener(`click`, this._onShowMoreButtonClick);
   }
 }
