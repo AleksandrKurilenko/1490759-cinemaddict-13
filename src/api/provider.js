@@ -1,4 +1,19 @@
-import {isOnline, renderToast} from '../utils';
+const SHOW_TIME = 4000;
+const isOnline = () => {
+  return window.navigator.onLine;
+};
+
+export const renderToast = (message) => {
+  const toast = document.createElement(`div`);
+  toast.textContent = message;
+  toast.classList.add(`toast`);
+
+  document.body.append(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, SHOW_TIME);
+};
 
 const createStoreStructure = (items) => {
   return items.reduce((acc, current) => {
