@@ -1,4 +1,3 @@
-// import getFilmsData from "../view/data";
 import {remove, render, renderToast} from './utils';
 import Stats from './view/stats';
 import {SiteState} from './data';
@@ -23,8 +22,7 @@ const STORE_PREFIX = `cinemaaddict-cache`;
 const STORE_VER = `v13`;
 
 const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
-// const FILMS = getFilmsData();
-// const TITLE = [`Top rated`, `Most commented`];
+
 let stats;
 
 const changeSiteState = (action) => {
@@ -49,6 +47,7 @@ const filmsModel = new FilmModel(api);
 const filterModel = new FilterModel();
 const commentsModel = new CommentsModel(api);
 const userModel = new UserModel(filmsModel);
+
 const siteMain = document.querySelector(`.main`);
 const header = document.querySelector(`.header`);
 const siteFooter = document.querySelector(`.footer`);
@@ -88,9 +87,3 @@ window.addEventListener(`offline`, () => {
   document.title += ` [offline]`;
   renderToast(`Lost connection`);
 });
-
-// const buttonWatchList = document.querySelector(`.film-card__controls-item--add-to-watchlist`);
-
-// const buttonWatched = document.querySelector(`.film-card__controls-item--mark-as-watched`);
-
-// const buttonFavorite = document.querySelector(`.film-card__controls-item:last-of-type`);
