@@ -297,3 +297,10 @@ export default class BoardPresenter {
     this._renderMostCommentedFilms();
   }
 }
+
+// export const filter = {
+//   [Category.All]: (films) => films,
+//   [Category.WATCHLIST]: (films) => films.filter((film) => (film.isInWatchlist)),
+//   [Category.HISTORY]: (films) => films.filter((film) => (film.isInHistory)),
+//   [Category.FAVOURITES]: (films) => films.filter((film) => (film.isFavourite))
+// };
