@@ -13,15 +13,16 @@ import Provider from './api/provider';
 import Store from './api/store';
 import UserModel from './model/user-model';
 
-const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict/`;
 
-const AUTHORIZATION = `Basic serttewt34tdfwrt`;
-
-const STORE_PREFIX = `cinemaaddict-cache`;
+const STORE_PREFIX = `cinemaddict-localstorage`;
 
 const STORE_VER = `v13`;
 
 const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
+
+const AUTHORIZATION = `Basic serttewt34tdfwrt`;
+
+const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict/`;
 
 let stats;
 
@@ -39,6 +40,7 @@ const changeSiteState = (action) => {
   }
 };
 
+
 const baseApi = new Api(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const api = new Provider(baseApi, store);
@@ -47,11 +49,11 @@ const filmsModel = new FilmModel(api);
 const filterModel = new FilterModel();
 const commentsModel = new CommentsModel(api);
 const userModel = new UserModel(filmsModel);
-
 const siteMain = document.querySelector(`.main`);
 const header = document.querySelector(`.header`);
 const siteFooter = document.querySelector(`.footer`);
 const footerStats = siteFooter.querySelector(`.footer__statistics`);
+
 
 const userPresenter = new UserPresenter(userModel);
 userPresenter.init(header);
@@ -75,7 +77,7 @@ api.getFilms()
 });
 
 window.addEventListener(`load`, () => {
-  navigator.serviceWorker.register(`/sw.js`);
+  navigator.serviceWorker.register(`./sw.js`);
 });
 
 window.addEventListener(`online`, () => {

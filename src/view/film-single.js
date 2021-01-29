@@ -1,5 +1,10 @@
 import Abstract from './abstract';
-import {getDuration} from '../utils';
+
+const getDuration = (duration) => {
+  const hours = duration / 60;
+  const minutes = duration % 60;
+  return (hours < 1) ? `${minutes}m` : `${Math.floor(hours)}h ${minutes}m`;
+};
 
 const createFilmTemplate = (film) => {
 
