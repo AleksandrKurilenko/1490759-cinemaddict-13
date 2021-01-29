@@ -39,29 +39,6 @@ const changeSiteState = (action) => {
   }
 };
 
-api.getFilms()
-.then((films) => {
-  filmsModel.setFilms(films);
-})
-.catch(() => {
-  filmsModel.setFilms([]);
-});
-
-window.addEventListener(`load`, () => {
-  navigator.serviceWorker.register(`/sw.js`);
-});
-
-window.addEventListener(`online`, () => {
-  document.title = document.title.replace(` [offline]`, ``);
-  api.sync();
-});
-
-window.addEventListener(`offline`, () => {
-  document.title += ` [offline]`;
-  renderToast(`Lost connection`);
-});
-
-
 const baseApi = new Api(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const api = new Provider(baseApi, store);
@@ -86,3 +63,25 @@ catalogPresenter.init(siteMain);
 
 const filmsCounterPresenter = new MovieListPresenter(filmsModel);
 filmsCounterPresenter.init(footerStats);
+
+api.getFilms()
+.then((films) => {
+  filmsModel.setFilms(films);
+})
+.catch(() => {
+  filmsModel.setFilms([]);
+});
+
+window.addEventListener(`load`, () => {
+  navigator.serviceWorker.register(`/sw.js`);
+});
+
+window.addEventListener(`online`, () => {
+  document.title = document.title.replace(` [offline]`, ``);
+  api.sync();
+});
+
+window.addEventListener(`offline`, () => {
+  document.title += ` [offline]`;
+  renderToast(`Lost connection`);
+});
