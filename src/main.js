@@ -42,8 +42,9 @@ const changeSiteState = (action) => {
 const baseApi = new Api(END_POINT, AUTHORIZATION);
 const store = new Store(STORE_NAME, window.localStorage);
 const api = new Provider(baseApi, store);
-const filterModel = new FilterModel();
+
 const filmsModel = new FilmModel(api);
+const filterModel = new FilterModel();
 const commentsModel = new CommentsModel(api);
 const userModel = new UserModel(filmsModel);
 
@@ -63,6 +64,7 @@ catalogPresenter.init(siteMain);
 
 const filmsCounterPresenter = new MovieListPresenter(filmsModel);
 filmsCounterPresenter.init(footerStats);
+
 
 api.getFilms()
 .then((films) => {
