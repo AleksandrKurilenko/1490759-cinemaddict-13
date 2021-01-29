@@ -15,7 +15,6 @@ export const renderToast = (message) => {
   }, SHOW_TIME);
 };
 
-
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -109,7 +108,3 @@ export const getDuration = (duration) => {
 export const isOnline = () => {
   return window.navigator.onLine;
 };
-
-// export const firstLetterCaps = (str) => {
-//   return str.charAt(0).toUpperCase() + str.slice(1);
-// };

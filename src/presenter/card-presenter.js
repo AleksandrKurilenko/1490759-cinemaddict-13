@@ -175,7 +175,6 @@ export default class CardPresenter {
     });
   }
 
-
   closePopup() {
     if (this._popup) {
       remove(this._popup);
