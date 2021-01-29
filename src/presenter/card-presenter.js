@@ -4,6 +4,12 @@ import PopupTemplate from '../view/popup';
 import {Category, UserAction, ModelMethod} from "../data.js";
 import CommentPresenter from './comment-presenter';
 
+// export const isKeyPres = (evt, cb, keyName) => {
+//   if (evt.key === keyName) {
+//     cb();
+//   }
+// };
+
 export default class CardPresenter {
   constructor(commentsModel, filmChangeCb, closePopupsCb, filterModel, updateMostCommentedBlockCb) {
     this._commentsModel = commentsModel;
