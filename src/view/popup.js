@@ -26,11 +26,11 @@ const createPopTemplate = (data) => {
     isFavourite
   } = data;
 
-  const genres = genre.map((index) => {
+  const genres = genre.map((value, index) => {
     return `<span class="film-details__genre">${genre[index]}</span>`;
   }).join(``);
 
-  const emojiRadio = EMOTIONS.map((index) => {
+  const emojiRadio = EMOTIONS.map((value, index) => {
     const emotion = EMOTIONS[index];
     return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emotion}" value="${emotion}"${(emotion === chosenSmile) ? ` checked` : ``}>
     <label class="film-details__emoji-label" for="emoji-${emotion}">
