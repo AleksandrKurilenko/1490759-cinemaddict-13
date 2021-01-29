@@ -39,33 +39,6 @@ const changeSiteState = (action) => {
   }
 };
 
-const baseApi = new Api(END_POINT, AUTHORIZATION);
-const store = new Store(STORE_NAME, window.localStorage);
-const api = new Provider(baseApi, store);
-
-const filmsModel = new FilmModel(api);
-const filterModel = new FilterModel();
-const commentsModel = new CommentsModel(api);
-const userModel = new UserModel(filmsModel);
-
-const siteMain = document.querySelector(`.main`);
-const header = document.querySelector(`.header`);
-const siteFooter = document.querySelector(`.footer`);
-const footerStats = siteFooter.querySelector(`.footer__statistics`);
-
-const userPresenter = new UserPresenter(userModel);
-userPresenter.init(header);
-
-const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
-filtersPresenter.init(siteMain);
-
-const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
-catalogPresenter.init(siteMain);
-
-const filmsCounterPresenter = new MovieListPresenter(filmsModel);
-filmsCounterPresenter.init(footerStats);
-
-
 api.getFilms()
 .then((films) => {
   filmsModel.setFilms(films);
@@ -87,3 +60,29 @@ window.addEventListener(`offline`, () => {
   document.title += ` [offline]`;
   renderToast(`Lost connection`);
 });
+
+
+const baseApi = new Api(END_POINT, AUTHORIZATION);
+const store = new Store(STORE_NAME, window.localStorage);
+const api = new Provider(baseApi, store);
+const filterModel = new FilterModel();
+const filmsModel = new FilmModel(api);
+const commentsModel = new CommentsModel(api);
+const userModel = new UserModel(filmsModel);
+
+const siteMain = document.querySelector(`.main`);
+const header = document.querySelector(`.header`);
+const siteFooter = document.querySelector(`.footer`);
+const footerStats = siteFooter.querySelector(`.footer__statistics`);
+
+const userPresenter = new UserPresenter(userModel);
+userPresenter.init(header);
+
+const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
+filtersPresenter.init(siteMain);
+
+const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
+catalogPresenter.init(siteMain);
+
+const filmsCounterPresenter = new MovieListPresenter(filmsModel);
+filmsCounterPresenter.init(footerStats);
