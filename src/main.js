@@ -54,20 +54,6 @@ const header = document.querySelector(`.header`);
 const siteFooter = document.querySelector(`.footer`);
 const footerStats = siteFooter.querySelector(`.footer__statistics`);
 
-
-const userPresenter = new UserPresenter(userModel);
-userPresenter.init(header);
-
-const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
-filtersPresenter.init(siteMain);
-
-const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
-catalogPresenter.init(siteMain);
-
-const filmsCounterPresenter = new MovieListPresenter(filmsModel);
-filmsCounterPresenter.init(footerStats);
-
-
 api.getFilms()
 .then((films) => {
   filmsModel.setFilms(films);
@@ -89,3 +75,16 @@ window.addEventListener(`offline`, () => {
   document.title += ` [offline]`;
   renderToast(`Lost connection`);
 });
+
+
+const userPresenter = new UserPresenter(userModel);
+userPresenter.init(header);
+
+const filtersPresenter = new MenuPresenter(filmsModel, filterModel, changeSiteState);
+filtersPresenter.init(siteMain);
+
+const catalogPresenter = new BoardPresenter(filmsModel, filterModel, commentsModel);
+catalogPresenter.init(siteMain);
+
+const filmsCounterPresenter = new MovieListPresenter(filmsModel);
+filmsCounterPresenter.init(footerStats);
