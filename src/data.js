@@ -77,3 +77,15 @@ export const KeyCodes = {
   ENTER_KEYCODE: 13,
   ESCAPE_KEYCODE: `Escape`
 };
+
+export const NumberValues = {
+  ONE: 1,
+  FIVE: 5,
+  TWELVE: 12,
+  TWENTY_FOUR: 24,
+  THIRTY: 30,
+  THIRTEEN: 48,
+  SIXTY: 60,
+  SIXTY_ONE: 61,
+  SIXTY_THOUSAND: 60000
+};

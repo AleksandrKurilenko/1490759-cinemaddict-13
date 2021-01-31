@@ -1,5 +1,5 @@
 import Abstract from './view/abstract';
-import {Category, RenderPosition} from './data';
+import {Category, NumberValues, RenderPosition} from './data';
 import dayjs from 'dayjs';
 
 const SHOW_TIME = 4000;
@@ -82,9 +82,9 @@ export const filter = {
 };
 
 export const getDuration = (duration) => {
-  const hours = duration / 60;
-  const minutes = duration % 60;
-  return (hours < 1) ? `${minutes}m` : `${Math.floor(hours)}h ${minutes}m`;
+  const hours = duration / NumberValues.SIXTY;
+  const minutes = duration % NumberValues.SIXTY;
+  return (hours < NumberValues.ONE) ? `${minutes}m` : `${Math.floor(hours)}h ${minutes}m`;
 };
 
 export const isOnline = () => {
@@ -93,46 +93,46 @@ export const isOnline = () => {
 
 export const getFormattedTime = (date) => {
 
-  const difference = (+new Date() - +new Date(date)) / 60000;
+  const difference = (+new Date() - +new Date(date)) / NumberValues.SIXTY_THOUSAND;
 
-  const hoursDiff = difference / 60;
+  const hoursDiff = difference / NumberValues.SIXTY;
 
-  const daysDiff = hoursDiff / 24;
+  const daysDiff = hoursDiff / NumberValues.TWENTY_FOUR;
 
-  const monthDiff = daysDiff / 30;
+  const monthDiff = daysDiff / NumberValues.THIRTY;
 
-  if (difference < 1) {
+  if (difference < NumberValues.ONE) {
     return `now`;
 
-  } else if (difference >= 1 && difference < 5) {
+  } else if (difference >= NumberValues.ONE && difference < NumberValues.FIVE) {
     return `a few minutes ago`;
 
-  } else if (difference >= 5 && difference < 60) {
+  } else if (difference >= NumberValues.FIVE && difference < NumberValues.SIXTY) {
     return `${Math.floor(difference)} minutes ago`;
 
-  } else if (difference > 60 && difference < 61) {
+  } else if (difference > NumberValues.SIXTY && difference < NumberValues.SIXTY_ONE) {
     return `1 hour ago`;
 
-  } else if (difference >= 61 && hoursDiff < 24) {
+  } else if (difference >= NumberValues.SIXTY_ONE && hoursDiff < NumberValues.TWENTY_FOUR) {
     return `${Math.floor(hoursDiff)} hours ago`;
 
-  } else if (hoursDiff > 24 && hoursDiff < 48) {
+  } else if (hoursDiff > NumberValues.TWENTY_FOUR && hoursDiff < NumberValues.THIRTEEN) {
     return `1 day ago`;
 
-  } else if (hoursDiff >= 48 && daysDiff < 30) {
+  } else if (hoursDiff >= NumberValues.THIRTEEN && daysDiff < NumberValues.THIRTY) {
     return `${Math.floor(daysDiff)} days ago`;
 
-  } else if (daysDiff >= 30 && daysDiff < 60) {
+  } else if (daysDiff >= NumberValues.THIRTY && daysDiff < NumberValues.SIXTY) {
     return `1 month ago`;
 
-  } else if (daysDiff >= 60 && monthDiff < 12) {
+  } else if (daysDiff >= NumberValues.SIXTY && monthDiff < NumberValues.TWELVE) {
     return `${Math.floor(monthDiff)} month ago`;
 
-  } else if (monthDiff >= 12 && monthDiff < 24) {
+  } else if (monthDiff >= NumberValues.TWELVE && monthDiff < NumberValues.TWENTY_FOUR) {
     return `1 year ago`;
 
-  } else if (monthDiff > 24) {
-    return `${Math.floor(monthDiff / 12)} years ago`;
+  } else if (monthDiff > NumberValues.TWENTY_FOUR) {
+    return `${Math.floor(monthDiff / NumberValues.TWELVE)} years ago`;
 
   } else {
     return dayjs(date).format(`YYYY/MM/DD HH:mm`);

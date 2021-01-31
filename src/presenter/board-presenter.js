@@ -1,8 +1,6 @@
 import SortTemplate from '../view/sort';
 import FilmListTemplate from '../view/film-list';
 import MoreButtonTemplate from '../view/more-button';
-// import FilmCardTopComponent from '../view/film-top';
-// import MostCommentedTemplate from '../view/most-commented';
 import LoadingTemplate from '../view/loading';
 import NoFilmsTemplate from '../view/no-films';
 import {render, remove, filter} from '../utils.js';
@@ -23,8 +21,6 @@ export default class BoardPresenter {
     this._filmsSortedByDate = null;
 
     this._showMoreButton = new MoreButtonTemplate();
-    // this._topRatedContainerView = new FilmCardTopComponent();
-    // this._mostCommentedContainerView = new MostCommentedTemplate();
     this._loadingView = new LoadingTemplate();
 
     this._filmCardPresenterGroups = {
@@ -67,8 +63,6 @@ export default class BoardPresenter {
   destroy() {
     this._clearCatalog({resetRenderedFilms: true, resetSort: true});
 
-    // remove(this._topRatedContainerView);
-    // remove(this._mostCommentedContainerView);
     remove(this._siteCatalog);
 
     this._filmsModel.removeObserver(ModelMethod.UPDATE_FILM, this._onfilmUpdate);
