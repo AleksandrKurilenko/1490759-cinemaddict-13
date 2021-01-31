@@ -15,13 +15,6 @@ export const renderToast = (message) => {
   }, SHOW_TIME);
 };
 
-// export const getRandomInteger = (a = 0, b = 1) => {
-//   const lower = Math.ceil(Math.min(a, b));
-//   const upper = Math.floor(Math.max(a, b));
-
-//   return Math.floor(lower + Math.random() * (upper - lower + 1));
-// };
-
 export const createElement = (template) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
@@ -79,18 +72,6 @@ export const isKeyPress = (evt, cb, keyName) => {
     cb();
   }
 };
-
-// export const updateUserPropertyArray = (idArr, filmId) => {
-//   const index = idArr.findIndex((id) => id === filmId);
-
-//   if (index === -1) {
-//     idArr.push(filmId);
-//     return idArr;
-//   }
-
-//   idArr.splice(index, 1);
-//   return idArr;
-// };
 
 export const filter = {
   [Category.All]: (films) => films,
