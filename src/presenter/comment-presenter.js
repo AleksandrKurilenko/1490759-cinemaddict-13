@@ -1,6 +1,6 @@
 import {render, remove} from '../utils.js';
 import {UserAction} from "../data.js";
-import CommentTemplate from '../view/comments';
+import CommentTemplate from '../view/comment';
 
 const DeleteButtonText = {
   COMMON: `Delete`,

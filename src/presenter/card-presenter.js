@@ -1,14 +1,9 @@
-import {render, replace, remove, isKeyPres} from '../utils.js';
+import {render, replace, remove, isKeyPress} from '../utils.js';
 import FilmSingleTemplate from '../view/film-single';
 import PopupTemplate from '../view/popup';
-import {Category, UserAction, ModelMethod} from "../data.js";
+import {Category, UserAction, ModelMethod, KeyCodes} from "../data.js";
 import CommentPresenter from './comment-presenter';
 
-// export const isKeyPres = (evt, cb, keyName) => {
-//   if (evt.key === keyName) {
-//     cb();
-//   }
-// };
 
 export default class CardPresenter {
   constructor(commentsModel, filmChangeCb, closePopupsCb, filterModel, updateMostCommentedBlockCb) {
@@ -118,7 +113,7 @@ export default class CardPresenter {
   }
 
   _onCommentAdd(evt) {
-    if (evt.keyCode === 13 && evt.ctrlKey) {
+    if (evt.keyCode === KeyCodes.ENTER_KEYCODE && evt.ctrlKey) {
       const commentData = this._popup.getNewCommentData();
       if (commentData === null) {
         return;
@@ -274,7 +269,7 @@ export default class CardPresenter {
   }
 
   _onPopupEscPress(evt) {
-    isKeyPres(evt, this.closePopup, `Escape`);
+    isKeyPress(evt, this.closePopup, KeyCodes.ESCAPE_KEYCODE);
   }
 
   _onPopupCrossClick() {

@@ -1,8 +1,8 @@
 import SortTemplate from '../view/sort';
-import FilmListTemplate from '../view/films-list';
+import FilmListTemplate from '../view/film-list';
 import MoreButtonTemplate from '../view/more-button';
-import FilmCardTopComponent from '../view/films-top';
-import MostCommentedTemplate from '../view/commented';
+import FilmCardTopComponent from '../view/film-top';
+import MostCommentedTemplate from '../view/most-commented';
 import LoadingTemplate from '../view/loading';
 import NoFilmsTemplate from '../view/no-films';
 import {render, remove, filter} from '../utils.js';
@@ -23,7 +23,7 @@ export default class BoardPresenter {
     this._filmsSortedByDate = null;
 
     this._showMoreButton = new MoreButtonTemplate();
-    this._topRaitedContainerView = new FilmCardTopComponent();
+    this._topRatedContainerView = new FilmCardTopComponent();
     this._mostCommentedContainerView = new MostCommentedTemplate();
     this._loadingView = new LoadingTemplate();
 
@@ -37,7 +37,7 @@ export default class BoardPresenter {
 
     this._FILMS_CARDS_NUMBER = 5;
     this._FILMS_STEP_LOAD = 5;
-    this._FILMS_TOP_RAITED_CARDS_NUMBER = 2;
+    this._FILMS_TOP_RATED_CARDS_NUMBER = 2;
     this._FILMS_MOST_COMMENTED_CARDS_NUMBER = 2;
     this._renderedFilms = this._FILMS_CARDS_NUMBER;
 
@@ -67,7 +67,7 @@ export default class BoardPresenter {
   destroy() {
     this._clearCatalog({resetRenderedFilms: true, resetSort: true});
 
-    remove(this._topRaitedContainerView);
+    remove(this._topRatedContainerView);
     remove(this._mostCommentedContainerView);
     remove(this._siteCatalog);
 
@@ -85,7 +85,7 @@ export default class BoardPresenter {
     switch (chosenSortType) {
       case SortType.DATE:
         return filteredFilms.sort((previous, current) => current.date - previous.date);
-      case SortType.RAITING:
+      case SortType.RATING:
         return filteredFilms.sort((previous, current) => current.raiting - previous.raiting);
       case SortType.COMMENTS:
         return filteredFilms.sort((previous, current) => current.comments.length - previous.comments.length);
@@ -154,7 +154,7 @@ export default class BoardPresenter {
     remove(this._noFilmsView);
     remove(this._showMoreButton);
     remove(this._loadingView);
-    remove(this._topRaitedContainerView);
+    remove(this._topRatedContainerView);
     remove(this._mostCommentedContainerView);
 
     this._renderedFilms = resetRenderedFilms ? this._renderedFilms = this._FILMS_CARDS_NUMBER : Math.min(this._renderedFilms, this._getFilms().length);
@@ -207,7 +207,7 @@ export default class BoardPresenter {
     const filmPresenter = new CardPresenter(this._commentsModel, this._onViewAction, this._closeAllPopups, this._filterModel, this.updateMostCommentedBlock);
     filmPresenter.init(film, container);
     switch (block) {
-      case FilmCardContainer.RAITED:
+      case FilmCardContainer.RATED:
         this._filmCardPresenterGroups.raited[film.id] = filmPresenter;
         break;
       case FilmCardContainer.COMMENTED:
@@ -244,14 +244,14 @@ export default class BoardPresenter {
     }
   }
 
-  _renderTopRaitedFilms() {
-    if (!this._getFilms(SortType.RAITING)[0].raiting) {
+  _renderTopRatedFilms() {
+    if (!this._getFilms(SortType.RATING)[0].raiting) {
       return;
     }
-    render(this._siteCatalog, this._topRaitedContainerView);
+    render(this._siteCatalog, this._topRatedContainerView);
     const topRaitedFilmsContainer = this._siteCatalog.getElement().querySelector(`.films-list--extra .films-list__container`);
-    for (let i = 0; i < Math.min(this._FILMS_TOP_RAITED_CARDS_NUMBER, this._getFilms(SortType.RAITING).length); i++) {
-      this._renderCard(topRaitedFilmsContainer, this._getFilms(SortType.RAITING)[i], FilmCardContainer.RAITED);
+    for (let i = 0; i < Math.min(this._FILMS_TOP_RATED_CARDS_NUMBER, this._getFilms(SortType.RATING).length); i++) {
+      this._renderCard(topRaitedFilmsContainer, this._getFilms(SortType.RATING)[i], FilmCardContainer.RATED);
     }
   }
 
@@ -293,7 +293,7 @@ export default class BoardPresenter {
 
     this._renderShowMoreButton();
 
-    this._renderTopRaitedFilms();
+    this._renderTopRatedFilms();
     this._renderMostCommentedFilms();
   }
 }

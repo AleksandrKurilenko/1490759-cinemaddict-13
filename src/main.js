@@ -1,10 +1,10 @@
 import {remove, render, renderToast} from './utils';
-import Stats from './view/stats';
+import StatsTemplate from './view/stats';
 import {SiteState} from './data';
 import UserPresenter from './presenter/user-presenter';
 import BoardPresenter from './presenter/board-presenter';
 import MenuPresenter from './presenter/menu-presenter';
-import MovieListPresenter from './presenter/movieList-presenter';
+import MovieListPresenter from './presenter/movie-list-presenter';
 import FilmModel from './model/film-model';
 import FilterModel from './model/filter-model';
 import CommentsModel from './model/comments-model';
@@ -34,7 +34,7 @@ const changeSiteState = (action) => {
       break;
     case SiteState.TO_STATS:
       catalogPresenter.destroy();
-      stats = new Stats(filmsModel.getFilms(), userModel.getRating());
+      stats = new StatsTemplate(filmsModel.getFilms(), userModel.getRating());
       render(siteMain, stats);
       break;
   }

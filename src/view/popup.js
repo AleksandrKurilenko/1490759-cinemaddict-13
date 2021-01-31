@@ -7,7 +7,7 @@ const createPopTemplate = (data) => {
   const {
     title,
     originalTitle,
-    raiting,
+    rating,
     date,
     duration,
     genre,
@@ -67,7 +67,7 @@ const createPopTemplate = (data) => {
             </div>
 
             <div class="film-details__rating">
-              <p class="film-details__total-rating">${raiting}</p>
+              <p class="film-details__total-rating">${rating}</p>
             </div>
           </div>
 
