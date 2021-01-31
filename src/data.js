@@ -8,7 +8,7 @@ export const ModelMethod = {
   UPDATE_USER_RAITING: `updateRaiting`
 };
 
-export const UserRaiting = {
+export const UserRating = {
   NOVICE: `novice`,
   FAN: `fan`,
   MOVIE_BUFF: `movie buff`

@@ -15,7 +15,7 @@ export default class UserPresenter {
     this._container = container;
     const prevUserView = this._userView;
 
-    this._userView = new UserTemplate(this._userModel.getRaiting());
+    this._userView = new UserTemplate(this._userModel.getRating());
 
     if (!prevUserView) {
       render(this._container, this._userView);
