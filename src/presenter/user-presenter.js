@@ -34,32 +34,3 @@ export default class UserPresenter {
     this.init();
   }
 }
-
-// export const replace = (newElement, oldElement) => {
-//   if (newElement instanceof Abstract) {
-//     newElement = newElement.getElement();
-//   }
-//   if (oldElement instanceof Abstract) {
-//     oldElement = oldElement.getElement();
-//   }
-
-//   const parentElement = oldElement.parentElement;
-
-//   if (parentElement === null || newElement === null || oldElement === null) {
-//     throw new Error(`One of elements doesn't exist in case of replacement`);
-//   }
-
-//   parentElement.replaceChild(newElement, oldElement);
-// };
-
-// export const remove = (element) => {
-//   if (element === null) {
-//     return;
-//   }
-
-//   if (!(element instanceof Abstract)) {
-//     throw new Error(`Can remove view components only`);
-//   }
-//   element.getElement().remove();
-//   element.removeElement();
-// };

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import {EMOTIONS, Category} from '../data.js';
 import {getDuration} from '../utils';
 
-const createPopTemplate = (data) => {
+const createPopupTemplate = (data) => {
   const {
     title,
     originalTitle,
@@ -169,7 +169,7 @@ export default class PopupTemplate extends Smart {
   }
 
   getTemplate() {
-    return createPopTemplate(this._data);
+    return createPopupTemplate(this._data);
   }
 
   _parseFilmTodata(film) {

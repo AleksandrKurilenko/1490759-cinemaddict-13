@@ -168,7 +168,7 @@ const createStats = (data) => {
 </section>`;
 };
 
-export default class Stats extends Smart {
+export default class StatsTemplate extends Smart {
   constructor(films, userRating) {
     super();
     this._data = {

@@ -1,11 +1,5 @@
+import {Category} from '../data';
 import Abstract from './abstract';
-
-export const Category = {
-  All: `all`,
-  WATCHLIST: `watchlist`,
-  HISTORY: `history`,
-  FAVOURITES: `favourites`
-};
 
 const createMenuTemplate = (films, currentSort) => {
   const stats = films.reduce((acc, current) => {

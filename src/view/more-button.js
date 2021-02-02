@@ -1,6 +1,6 @@
 import Abstract from './abstract';
 
-const createMoreButton = () => {
+const createMoreButtonTemplate = () => {
   return `<button class="films-list__show-more">Show more</button>`;
 };
 
@@ -11,7 +11,7 @@ export default class MoreButtonTemplate extends Abstract {
     this._onShowMoreButtonClick = this._onShowMoreButtonClick.bind(this);
   }
   getTemplate() {
-    return createMoreButton();
+    return createMoreButtonTemplate();
   }
 
   _onShowMoreButtonClick(evt) {

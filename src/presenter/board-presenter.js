@@ -1,8 +1,8 @@
 import SortTemplate from '../view/sort';
-import FilmListTemplate from '../view/films-list';
+import FilmListTemplate from '../view/film-list';
 import MoreButtonTemplate from '../view/more-button';
-import FilmCardTopComponent from '../view/films-top';
-import MostCommentedTemplate from '../view/commented';
+import FilmCardTopTemplate from '../view/film-card-top';
+import MostCommentedTemplate from '../view/most-commented';
 import LoadingTemplate from '../view/loading';
 import NoFilmsTemplate from '../view/no-films';
 import {render, remove, filter} from '../utils.js';
@@ -23,13 +23,13 @@ export default class BoardPresenter {
     this._filmsSortedByDate = null;
 
     this._showMoreButton = new MoreButtonTemplate();
-    this._topRaitedContainerView = new FilmCardTopComponent();
+    this._topRaitedContainerView = new FilmCardTopTemplate();
     this._mostCommentedContainerView = new MostCommentedTemplate();
     this._loadingView = new LoadingTemplate();
 
     this._filmCardPresenterGroups = {
       catalog: {},
-      raited: {},
+      rated: {},
       commented: {}
     };
     this._currentSortType = SortType.DEFAULT;
@@ -208,7 +208,7 @@ export default class BoardPresenter {
     filmPresenter.init(film, container);
     switch (block) {
       case FilmCardContainer.RATED:
-        this._filmCardPresenterGroups.raited[film.id] = filmPresenter;
+        this._filmCardPresenterGroups.rated[film.id] = filmPresenter;
         break;
       case FilmCardContainer.COMMENTED:
         this._filmCardPresenterGroups.commented[film.id] = filmPresenter;
@@ -297,10 +297,3 @@ export default class BoardPresenter {
     this._renderMostCommentedFilms();
   }
 }
-
-// export const filter = {
-//   [Category.All]: (films) => films,
-//   [Category.WATCHLIST]: (films) => films.filter((film) => (film.isInWatchlist)),
-//   [Category.HISTORY]: (films) => films.filter((film) => (film.isInHistory)),
-//   [Category.FAVOURITES]: (films) => films.filter((film) => (film.isFavourite))
-// };

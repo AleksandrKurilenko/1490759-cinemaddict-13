@@ -72,3 +72,8 @@ export const UpdateType = {
   MINOR: `MINOR`,
   MAJOR: `MAJOR`
 };
+
+export const KeyboardKeyCodes = {
+  ENTER_CODE: 13,
+  ESCAPE: `Escape`
+};
