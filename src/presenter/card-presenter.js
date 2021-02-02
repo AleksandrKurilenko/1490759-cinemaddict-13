@@ -115,6 +115,7 @@ export default class CardPresenter {
     if (evt.keyCode === KeyboardKeyCodes.ENTER_CODE && evt.ctrlKey) {
       const commentData = this._popup.getNewCommentData();
       if (commentData === null) {
+        this._popup.onCommentFormError();
         return;
       }
       const comment = Object.assign({},
