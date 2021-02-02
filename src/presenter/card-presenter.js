@@ -1,4 +1,4 @@
-import {render, replace, remove, isKeyPres} from '../utils.js';
+import {render, replace, remove, isKeyPress} from '../utils.js';
 import FilmSingleTemplate from '../view/film-single';
 import PopupTemplate from '../view/popup';
 import {Category, UserAction, ModelMethod} from "../data.js";
@@ -274,7 +274,7 @@ export default class CardPresenter {
   }
 
   _onPopupEscPress(evt) {
-    isKeyPres(evt, this.closePopup, `Escape`);
+    isKeyPress(evt, this.closePopup, `Escape`);
   }
 
   _onPopupCrossClick() {

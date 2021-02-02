@@ -85,8 +85,8 @@ export default class BoardPresenter {
     switch (chosenSortType) {
       case SortType.DATE:
         return filteredFilms.sort((previous, current) => current.date - previous.date);
-      case SortType.RAITING:
-        return filteredFilms.sort((previous, current) => current.raiting - previous.raiting);
+      case SortType.RATING:
+        return filteredFilms.sort((previous, current) => current.rating - previous.rating);
       case SortType.COMMENTS:
         return filteredFilms.sort((previous, current) => current.comments.length - previous.comments.length);
       default:
@@ -207,7 +207,7 @@ export default class BoardPresenter {
     const filmPresenter = new CardPresenter(this._commentsModel, this._onViewAction, this._closeAllPopups, this._filterModel, this.updateMostCommentedBlock);
     filmPresenter.init(film, container);
     switch (block) {
-      case FilmCardContainer.RAITED:
+      case FilmCardContainer.RATED:
         this._filmCardPresenterGroups.raited[film.id] = filmPresenter;
         break;
       case FilmCardContainer.COMMENTED:
@@ -245,13 +245,13 @@ export default class BoardPresenter {
   }
 
   _renderTopRaitedFilms() {
-    if (!this._getFilms(SortType.RAITING)[0].raiting) {
+    if (!this._getFilms(SortType.RATING)[0].rating) {
       return;
     }
     render(this._siteCatalog, this._topRaitedContainerView);
     const topRaitedFilmsContainer = this._siteCatalog.getElement().querySelector(`.films-list--extra .films-list__container`);
-    for (let i = 0; i < Math.min(this._FILMS_TOP_RAITED_CARDS_NUMBER, this._getFilms(SortType.RAITING).length); i++) {
-      this._renderCard(topRaitedFilmsContainer, this._getFilms(SortType.RAITING)[i], FilmCardContainer.RAITED);
+    for (let i = 0; i < Math.min(this._FILMS_TOP_RAITED_CARDS_NUMBER, this._getFilms(SortType.RATING).length); i++) {
+      this._renderCard(topRaitedFilmsContainer, this._getFilms(SortType.RATING)[i], FilmCardContainer.RATED);
     }
   }
 

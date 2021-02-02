@@ -13,13 +13,13 @@ const createFilmTemplate = (film) => {
     return (film[property] === true) ? ` film-card__controls-item--active` : ``;
   };
 
-  const {title, raiting, date, duration, genre, poster, description, comments} = film;
+  const {title, rating, date, duration, genre, poster, description, comments} = film;
 
   const clippedDescription = (description.length > 140) ? `${description.slice(0, 139)}...` : description;
 
   return `<article class="film-card">
   <h3 class="film-card__title">${title}</h3>
-  <p class="film-card__rating">${raiting}</p>
+  <p class="film-card__rating">${rating}</p>
   <p class="film-card__info">
     <span class="film-card__year">${new Date(date).getFullYear()}</span>
     <span class="film-card__duration">${getDuration(duration)}</span>

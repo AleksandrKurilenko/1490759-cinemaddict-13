@@ -5,10 +5,10 @@ export const ModelMethod = {
   ADD_COMMENT: `addComment`,
   DELETE_COMMENT: `deleteComment`,
   SET_FILMS: `setFilms`,
-  UPDATE_USER_RAITING: `updateRaiting`
+  UPDATE_USER_RATING: `updateRating`
 };
 
-export const UserRaiting = {
+export const UserRating = {
   NOVICE: `novice`,
   FAN: `fan`,
   MOVIE_BUFF: `movie buff`
@@ -37,7 +37,7 @@ export const EMOTIONS = [
 export const SortType = {
   DEFAULT: `default`,
   DATE: `date`,
-  RAITING: `raiting`,
+  RATING: `rating`,
   COMMENTS: `comments`
 };
 
@@ -49,7 +49,7 @@ export const Category = {
 };
 
 export const FilmCardContainer = {
-  RAITED: `raited`,
+  RATED: `rated`,
   COMMENTED: `commented`
 };
 

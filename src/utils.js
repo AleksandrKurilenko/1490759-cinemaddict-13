@@ -74,7 +74,7 @@ export const remove = (element) => {
   element.removeElement();
 };
 
-export const isKeyPres = (evt, cb, keyName) => {
+export const isKeyPress = (evt, cb, keyName) => {
   if (evt.key === keyName) {
     cb();
   }

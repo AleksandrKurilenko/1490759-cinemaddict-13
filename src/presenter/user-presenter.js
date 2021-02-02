@@ -6,16 +6,16 @@ export default class UserPresenter {
   constructor(userModel) {
     this._userModel = userModel;
 
-    this._onUserRaitingChange = this._onUserRaitingChange.bind(this);
+    this._onUserRatingChange = this._onUserRatingChange.bind(this);
 
-    this._userModel.addObserver(ModelMethod.UPDATE_USER_RAITING, this._onUserRaitingChange);
+    this._userModel.addObserver(ModelMethod.UPDATE_USER_RATING, this._onUserRatingChange);
   }
 
   init(container = this._container) {
     this._container = container;
     const prevUserView = this._userView;
 
-    this._userView = new UserTemplate(this._userModel.getRaiting());
+    this._userView = new UserTemplate(this._userModel.getRating());
 
     if (!prevUserView) {
       render(this._container, this._userView);
@@ -30,7 +30,7 @@ export default class UserPresenter {
     return films.reduce((acc, currentFilm) => acc + currentFilm.isInHistory, 0);
   }
 
-  _onUserRaitingChange() {
+  _onUserRatingChange() {
     this.init();
   }
 }
