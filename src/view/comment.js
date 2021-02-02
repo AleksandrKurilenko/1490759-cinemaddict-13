@@ -1,6 +1,7 @@
 import Abstract from './abstract';
 import dayjs from "dayjs";
 import he from "he";
+import {DigitalValues} from '../data';
 
 const createCommentTemplate = (comment) => {
   const {
@@ -12,46 +13,46 @@ const createCommentTemplate = (comment) => {
 
   const getFormattedTime = (date) => {
 
-    const difference = (+new Date() - +new Date(date)) / 60000;
+    const difference = (+new Date() - +new Date(date)) / DigitalValues.ESCSIXTY_THOUSANDAPE;
 
-    const hoursDiff = difference / 60;
+    const hoursDiff = difference / DigitalValues.SIXTY;
 
-    const daysDiff = hoursDiff / 24;
+    const daysDiff = hoursDiff / DigitalValues.TWENTY_FOUR;
 
-    const monthDiff = daysDiff / 30;
+    const monthDiff = daysDiff / DigitalValues.THIRTY;
 
-    if (difference < 1) {
+    if (difference < DigitalValues.ONE) {
       return `now`;
 
-    } else if (difference >= 1 && difference < 5) {
+    } else if (difference >= DigitalValues.ONE && difference < DigitalValues.FIVE) {
       return `a few minutes ago`;
 
-    } else if (difference >= 5 && difference < 60) {
+    } else if (difference >= DigitalValues.FIVE && difference < DigitalValues.SIXTY) {
       return `${Math.floor(difference)} minutes ago`;
 
-    } else if (difference > 60 && difference < 61) {
+    } else if (difference > DigitalValues.SIXTY && difference < DigitalValues.SIXTY_ONE) {
       return `1 hour ago`;
 
-    } else if (difference >= 61 && hoursDiff < 24) {
+    } else if (difference >= DigitalValues.SIXTY_ONE && hoursDiff < DigitalValues.TWENTY_FOUR) {
       return `${Math.floor(hoursDiff)} hours ago`;
 
-    } else if (hoursDiff > 24 && hoursDiff < 48) {
+    } else if (hoursDiff > DigitalValues.TWENTY_FOUR && hoursDiff < DigitalValues.FORTY_EIGHT) {
       return `1 day ago`;
 
-    } else if (hoursDiff >= 48 && daysDiff < 30) {
+    } else if (hoursDiff >= DigitalValues.FORTY_EIGHT && daysDiff < DigitalValues.THIRTY) {
       return `${Math.floor(daysDiff)} days ago`;
 
-    } else if (daysDiff >= 30 && daysDiff < 60) {
+    } else if (daysDiff >= DigitalValues.THIRTY && daysDiff < DigitalValues.SIXTY) {
       return `1 month ago`;
 
-    } else if (daysDiff >= 60 && monthDiff < 12) {
+    } else if (daysDiff >= DigitalValues.SIXTY && monthDiff < DigitalValues.TWELVE) {
       return `${Math.floor(monthDiff)} month ago`;
 
-    } else if (monthDiff >= 12 && monthDiff < 24) {
+    } else if (monthDiff >= DigitalValues.TWELVE && monthDiff < DigitalValues.TWENTY_FOUR) {
       return `1 year ago`;
 
-    } else if (monthDiff > 24) {
-      return `${Math.floor(monthDiff / 12)} years ago`;
+    } else if (monthDiff > DigitalValues.TWENTY_FOUR) {
+      return `${Math.floor(monthDiff / DigitalValues.TWELVE)} years ago`;
 
     } else {
       return dayjs(commentDate).format(`YYYY/MM/DD HH:mm`);
