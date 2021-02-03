@@ -18,7 +18,7 @@ const STORE_NAME = `cinemaddict-localstorage-v13`;
 
 const AUTHORIZATION = `Basic serttewt34tdfwrt`;
 
-const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict`;
+const END_POINT = `https://13.ecmascript.pages.academy/cinemaddict/`;
 
 let stats;
 
