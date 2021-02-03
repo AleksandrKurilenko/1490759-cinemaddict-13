@@ -16,7 +16,7 @@ import UserModel from './model/user-model';
 
 const STORE_PREFIX = `cinemaddict-localstorage`;
 
-const STORE_VER = `v1`;
+const STORE_VER = `v13`;
 
 const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 

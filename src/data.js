@@ -74,18 +74,7 @@ export const UpdateType = {
 };
 
 export const KeyboardKeyCodes = {
-  ENTER_CODE: 13,
-  ESCAPE: `Escape`
+  ENTER_CODE: `Enter`,
+  ESCAPE_CODE: `Escape`
 };
 
-export const DigitalValues = {
-  ONE: 1,
-  TWELVE: 12,
-  FIVE: 5,
-  TWENTY_FOUR: 24,
-  THIRTY: 30,
-  FORTY_EIGHT: 48,
-  SIXTY: 60,
-  SIXTY_ONE: 61,
-  ESCSIXTY_THOUSANDAPE: 60000,
-};

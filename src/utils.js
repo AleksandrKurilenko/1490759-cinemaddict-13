@@ -2,6 +2,7 @@ import Abstract from './view/abstract';
 import {Category, RenderPosition} from './data';
 
 const SHOW_TIME = 4000;
+const minuteInHour = 60;
 
 export const renderToast = (message) => {
   const toast = document.createElement(`div`);
@@ -81,8 +82,8 @@ export const filter = {
 };
 
 export const getDuration = (duration) => {
-  const hours = duration / 60;
-  const minutes = duration % 60;
+  const hours = duration / minuteInHour;
+  const minutes = duration % minuteInHour;
   return (hours < 1) ? `${minutes}m` : `${Math.floor(hours)}h ${minutes}m`;
 };
 
