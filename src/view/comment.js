@@ -16,17 +16,17 @@ const createCommentTemplate = (comment) => {
   const dateFromNow = dayjs(`${formatDate}`).fromNow();
 
   return `<li class="film-details__comment">
-  <span class="film-details__comment-emoji">
-    <img src="./images/emoji/${emotion}.png" width="55" height="55" alt="emoji-${emotion}">
-  </span>
-  <div>
+<span class="film-details__comment-emoji">
+  <img src="./images/emoji/${emotion}.png" width="55" height="55" alt="emoji-${emotion}">
+</span>
+<div>
 <p class="film-details__comment-text">${he.encode(text)}</p>
-    <p class="film-details__comment-info">
-      <span class="film-details__comment-author">${he.encode(author)}</span>
-      <span class="film-details__comment-day">${dateFromNow}}</span>
-      <button class="film-details__comment-delete">Delete</button>
-    </p>
-  </div>
+  <p class="film-details__comment-info">
+    <span class="film-details__comment-author">${he.encode(author)}</span>
+    <span class="film-details__comment-day">${dateFromNow}}</span>
+    <button class="film-details__comment-delete">Delete</button>
+  </p>
+</div>
 </li>`;
 };
 

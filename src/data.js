@@ -1,3 +1,5 @@
+export const MAX_DESCRIPTION_LENGTH = 140;
+
 export const ModelMethod = {
   UPDATE_FILM: `updateFilm`,
   UPDATE_FILM_WITH_RERENDER: `updateFilmWithRerender`,
@@ -77,4 +79,3 @@ export const KeyboardKeyCodes = {
   ENTER_CODE: `Enter`,
   ESCAPE_CODE: `Escape`
 };
-

@@ -2,11 +2,11 @@ import {Category} from '../data';
 import Abstract from './abstract';
 
 const createMenuTemplate = (films, currentSort) => {
-  const stats = films.reduce((acc, current) => {
+  const stats = films.reduce((accumulator, current) => {
     return {
-      inWatchlist: acc.inWatchlist + current.isInWatchlist,
-      inHistory: acc.inHistory + current.isInHistory,
-      favourites: acc.favourites + current.isFavourite,
+      inWatchlist: accumulator.inWatchlist + current.isInWatchlist,
+      inHistory: accumulator.inHistory + current.isInHistory,
+      favourites: accumulator.favourites + current.isFavourite,
     };
   }, {
     inWatchlist: 0,

@@ -1,3 +1,4 @@
+import {MAX_DESCRIPTION_LENGTH} from '../data';
 import {getDuration} from '../utils';
 import Abstract from './abstract';
 
@@ -11,7 +12,7 @@ const createFilmTemplate = (film) => {
 
   const {title, rating, date, duration, genre, poster, description, comments} = film;
 
-  const clippedDescription = (description.length > 140) ? `${description.slice(0, 139)}...` : description;
+  const clippedDescription = (description.length > MAX_DESCRIPTION_LENGTH) ? `${description.slice(0, MAX_DESCRIPTION_LENGTH - 1)}...` : description;
 
   return `<article class="film-card">
   <h3 class="film-card__title">${title}</h3>
