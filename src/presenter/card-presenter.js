@@ -269,7 +269,7 @@ export default class CardPresenter {
   }
 
   _onPopupEscPress(evt) {
-    isKeyPress(evt, this.closePopup, KeyboardKeyCodes.ESCAPE_CODE);
+    isKeyPress(evt, this.closePopup, `Escape`);
   }
 
   _onPopupCrossClick() {

@@ -76,6 +76,5 @@ export const UpdateType = {
 };
 
 export const KeyboardKeyCodes = {
-  ENTER_CODE: `Enter`,
-  ESCAPE_CODE: `Escape`
+  ENTER_CODE: 13
 };
